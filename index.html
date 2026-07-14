@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0E1613">
+<title>Franco Suisse 2026 — Plan d'entraînement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0E1613;
+  --pine:#17231E;
+  --pine2:#1E2E27;
+  --edge:#2A3D34;
+  --snow:#EAF2E9;
+  --mist:#8FA69B;
+  --flag:#FF7A3D;      /* balisage */
+  --lichen:#9CC069;    /* EF */
+  --gold:#F2C14E;      /* SL / course */
+  --slate:#7BAFC4;     /* trajets */
+  --done:#79C97F;
+  --stone:#5E6E66;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  background:var(--night);
+  color:var(--snow);
+  font-family:'Archivo',system-ui,sans-serif;
+  font-size:15px;line-height:1.5;
+  padding-bottom:70px;
+}
+.wrap{max-width:680px;margin:0 auto;padding:0 14px}
+
+/* ---------- header ---------- */
+header{padding:26px 0 10px;position:relative}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--flag);text-transform:uppercase}
+h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,8vw,44px);line-height:1.02;margin:6px 0 4px}
+h1 .thin{color:var(--mist);font-weight:400}
+.subline{color:var(--mist);font-size:13px}
+.subline b{color:var(--snow);font-weight:600}
+.countdown{
+  display:flex;align-items:baseline;gap:8px;margin-top:14px;
+  font-family:'JetBrains Mono',monospace;
+}
+.countdown .big{font-size:40px;font-weight:700;color:var(--gold);line-height:1}
+.countdown .lbl{font-size:12px;color:var(--mist);text-transform:uppercase;letter-spacing:.12em}
+
+/* rubalise */
+.rubalise{
+  height:8px;margin:18px 0 0;border-radius:4px;
+  background:repeating-linear-gradient(-45deg,var(--flag) 0 10px,#fff2 10px 20px);
+  opacity:.85;
+}
+
+/* ---------- hero ridge ---------- */
+#ridgeCard{padding:16px 0 4px}
+.sec-label{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--mist);margin:0 0 8px;
+}
+#ridge{width:100%;height:auto;display:block;touch-action:manipulation}
+#ridge polygon{cursor:pointer;transition:opacity .15s}
+.ridge-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--mist);margin-top:6px}
+.ridge-legend span{display:inline-flex;align-items:center;gap:5px}
+.dotk{width:9px;height:9px;border-radius:2px;display:inline-block}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0 6px}
+@media(min-width:520px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--pine);border:1px solid var(--edge);border-radius:12px;padding:12px 12px 10px}
+.stat .v{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;color:var(--snow)}
+.stat .v em{font-style:normal;font-size:12px;color:var(--mist);font-weight:400}
+.stat .k{font-size:11px;color:var(--mist);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.stat.hl .v{color:var(--flag)}
+
+/* ---------- today ---------- */
+#today{margin:16px 0}
+.today-card{
+  background:linear-gradient(140deg,var(--pine2),var(--pine));
+  border:1px solid var(--flag);border-radius:14px;padding:14px;
+}
+.today-card .when{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--flag);letter-spacing:.12em;text-transform:uppercase}
+.today-card h3{font-family:'Bricolage Grotesque',sans-serif;font-size:19px;margin:4px 0 2px}
+.today-card p{font-size:13px;color:var(--mist)}
+
+/* ---------- weeks ---------- */
+#weeks{margin-top:20px}
+.week{border:1px solid var(--edge);border-radius:14px;background:var(--pine);margin-bottom:12px;overflow:hidden;scroll-margin-top:12px}
+.week.cur{border-color:var(--flag)}
+.wk-head{
+  display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;user-select:none;
+}
+.wk-num{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--night);
+  background:var(--mist);border-radius:7px;padding:3px 7px;flex-shrink:0;
+}
+.week.cur .wk-num{background:var(--flag)}
+.wk-title{flex:1;min-width:0}
+.wk-title b{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;display:block}
+.wk-title span{font-size:11.5px;color:var(--mist)}
+.wk-load{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--mist);text-align:right;flex-shrink:0}
+.wk-load b{color:var(--snow);font-size:13px}
+.wk-prog{height:3px;background:var(--edge)}
+.wk-prog i{display:block;height:100%;background:var(--done);width:0;transition:width .3s}
+.wk-body{display:none;padding:4px 10px 12px}
+.week.open .wk-body{display:block}
+.wk-note{
+  font-size:12.5px;color:var(--mist);background:var(--night);border-radius:9px;
+  padding:9px 11px;margin:8px 4px 10px;border-left:3px solid var(--stone);
+}
+.wk-note.warn{border-left-color:var(--gold);color:#d8cfa8}
+.wk-note.baby{border-left-color:#d98fb6;color:#dbc0cf}
+
+/* ---------- session ---------- */
+.sess{
+  display:flex;gap:10px;padding:11px 6px;border-top:1px solid var(--edge);align-items:flex-start;
+}
+.sess:first-child{border-top:none}
+.sess.info{opacity:.62}
+.sess.checked .s-title{color:var(--done)}
+.chk{
+  width:24px;height:24px;border-radius:7px;border:2px solid var(--stone);flex-shrink:0;margin-top:2px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  font-size:15px;color:var(--night);transition:all .15s;background:transparent;
+}
+.sess.checked .chk{background:var(--done);border-color:var(--done)}
+.sess.info .chk{visibility:hidden}
+.s-main{flex:1;min-width:0}
+.s-top{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.s-day{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mist);flex-shrink:0}
+.s-title{font-weight:600;font-size:14.5px}
+.badge{
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.06em;
+  padding:2px 6px;border-radius:5px;color:var(--night);flex-shrink:0;
+}
+.b-EF{background:var(--lichen)} .b-DP{background:var(--flag)} .b-TRAJ{background:var(--slate)}
+.b-SL{background:var(--gold)} .b-RENFO{background:#B9A7D9} .b-COURSE{background:var(--gold)}
+.b-GARDE{background:var(--stone);color:var(--snow)} .b-REPOS{background:var(--edge);color:var(--mist)}
+.b-FLEX{background:#D98FB6}
+.s-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mist);margin-top:1px}
+.s-desc{font-size:12.5px;color:var(--mist);margin-top:3px}
+.feel-chip{
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);
+  border:1px solid var(--edge);border-radius:6px;padding:2px 7px;cursor:pointer;
+}
+.feel-box{margin-top:8px;background:var(--night);border-radius:10px;padding:10px;display:none}
+.sess.editing .feel-box{display:block}
+.feel-box label{font-size:11.5px;color:var(--mist);display:flex;justify-content:space-between}
+.feel-box label b{color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:14px}
+.feel-box input[type=range]{width:100%;margin:8px 0;accent-color:var(--flag)}
+.feel-box input[type=text]{
+  width:100%;background:var(--pine);border:1px solid var(--edge);border-radius:7px;
+  color:var(--snow);font-family:'Archivo',sans-serif;font-size:13px;padding:7px 9px;margin-bottom:8px;
+}
+.feel-box .row{display:flex;gap:8px}
+.feel-box .grid2{display:flex;gap:8px;margin-bottom:8px}
+.feel-box .fld{flex:1}
+.feel-box .fld small{font-size:10px;color:var(--stone);display:block;margin-bottom:2px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
+.feel-box input[type=date],.feel-box input[type=number]{
+  width:100%;background:var(--pine);border:1px solid var(--edge);border-radius:7px;
+  color:var(--snow);font-family:'JetBrains Mono',monospace;font-size:13px;padding:7px 9px;
+}
+.feel-box input[type=date]{color-scheme:dark}
+.btn{
+  border:none;border-radius:8px;padding:8px 14px;font-family:'Archivo',sans-serif;
+  font-weight:600;font-size:13px;cursor:pointer;
+}
+.btn.p{background:var(--flag);color:var(--night)}
+.btn.g{background:var(--edge);color:var(--snow)}
+
+/* ---------- chart ---------- */
+#chartCard{background:var(--pine);border:1px solid var(--edge);border-radius:14px;padding:14px;margin:20px 0}
+#chart{width:100%;height:auto}
+.chart-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--mist);margin-top:8px}
+
+/* ---------- renfo & conseils ---------- */
+.foldable{background:var(--pine);border:1px solid var(--edge);border-radius:14px;margin:12px 0;overflow:hidden}
+.foldable>summary{
+  list-style:none;cursor:pointer;padding:13px 14px;font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:700;font-size:15px;display:flex;justify-content:space-between;align-items:center;
+}
+.foldable>summary::-webkit-details-marker{display:none}
+.foldable>summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--flag);font-size:18px}
+.foldable[open]>summary::after{content:'–'}
+.fold-body{padding:0 14px 14px;font-size:13.5px;color:var(--mist)}
+.fold-body h4{color:var(--snow);font-size:13px;margin:12px 0 4px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em}
+.fold-body ul{padding-left:18px;margin:4px 0}
+.fold-body li{margin:3px 0}
+.fold-body b{color:var(--snow)}
+
+/* ---------- footer / data ---------- */
+.databar{display:flex;gap:8px;margin:18px 0 8px;flex-wrap:wrap}
+.databar .btn{flex:1;min-width:130px}
+.foot{font-size:11px;color:var(--stone);text-align:center;margin:10px 0 20px;font-family:'JetBrains Mono',monospace}
+#fileImport{display:none}
+.toast{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--flag);color:var(--night);font-weight:600;font-size:13px;
+  border-radius:10px;padding:10px 18px;transition:transform .25s;z-index:50;
+}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+/* ---- guard banner ---- */
+.guard{background:linear-gradient(135deg,#3a2a1a,#2a1e14);border:1px solid var(--gold);border-radius:12px;padding:12px 14px;margin:4px 0 8px;display:flex;gap:10px;align-items:flex-start}
+.guard .ic{font-size:20px;line-height:1}
+.guard b{color:var(--gold)}
+.guard p{font-size:13px;color:#e6dcc0;margin-top:2px}
+/* ---- extras ---- */
+.extras-head{display:flex;align-items:center;justify-content:space-between;margin:2px 0 8px}
+.extras-head .sec-label{margin:0}
+.addbtn{background:var(--pine2);border:1px dashed var(--flag);color:var(--flag);border-radius:9px;padding:7px 12px;font-family:'Archivo',sans-serif;font-weight:600;font-size:13px;cursor:pointer}
+.extra-form{background:var(--pine);border:1px solid var(--flag);border-radius:12px;padding:12px;margin-bottom:10px;display:none}
+.extra-form.on{display:block}
+.extra-form .grid2{display:flex;gap:8px;margin-bottom:8px}
+.extra-form .fld{flex:1}
+.extra-form .fld small{font-size:10px;color:var(--stone);display:block;margin-bottom:2px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
+.extra-form input,.extra-form select{width:100%;background:var(--night);border:1px solid var(--edge);border-radius:7px;color:var(--snow);font-family:'JetBrains Mono',monospace;font-size:13px;padding:7px 9px}
+.extra-form input[type=date]{color-scheme:dark}
+.extra-form input[type=range]{padding:0;accent-color:var(--flag)}
+.extra-item{display:flex;gap:9px;align-items:flex-start;background:var(--pine);border:1px solid var(--edge);border-radius:10px;padding:10px 11px;margin-bottom:7px}
+.extra-item .xdate{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--flag);flex-shrink:0;width:42px}
+.extra-item .xmain{flex:1;min-width:0}
+.extra-item .xmeta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mist);margin-top:2px}
+.extra-item .xdel{background:none;border:none;color:var(--stone);font-size:17px;cursor:pointer;flex-shrink:0}
+/* ---- postponed ---- */
+.sess.postponed{opacity:.5}
+.sess.postponed .s-title{text-decoration:line-through}
+.tag-report{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;background:var(--slate);color:var(--night);padding:2px 6px;border-radius:5px}
+.mini-actions{display:flex;gap:8px;margin-top:6px}
+.mini-actions button{background:none;border:1px solid var(--edge);color:var(--mist);border-radius:6px;font-size:11px;padding:3px 8px;cursor:pointer;font-family:'Archivo',sans-serif}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Plan d'entraînement · 13 juil → 3 oct 2026</div>
+  <h1>FRANCO<br>SUISSE <span class="thin">105K</span></h1>
+  <div class="subline">105 km · 4 000 D+ · samedi 3 octobre 2026 · objectif : <b>finisher confortable</b></div>
+  <div class="countdown"><span class="big" id="jj">–</span><span class="lbl">jours avant le départ</span></div>
+  <div class="rubalise" aria-hidden="true"></div>
+</header>
+
+<section id="ridgeCard">
+  <div class="sec-label">La ligne de crête — 12 semaines, une par sommet</div>
+  <svg id="ridge" viewBox="0 0 720 190" role="img" aria-label="Profil de charge des 12 semaines"></svg>
+  <div class="ridge-legend">
+    <span><i class="dotk" style="background:var(--lichen)"></i>reprise / assimilation</span>
+    <span><i class="dotk" style="background:var(--flag)"></i>charge</span>
+    <span><i class="dotk" style="background:var(--gold)"></i>choc / pic</span>
+    <span><i class="dotk" style="background:var(--slate)"></i>affûtage</span>
+  </div>
+</section>
+
+<section class="stats" id="stats"></section>
+
+<section id="today"></section>
+
+<section id="guard"></section>
+
+<section id="extras"></section>
+
+<section id="weeks"></section>
+
+<section id="chartCard">
+  <div class="sec-label">Charge hebdo — prévu vs réalisé · RPE moyen (effort perçu)</div>
+  <svg id="chart" viewBox="0 0 720 240"></svg>
+  <div class="chart-legend">
+    <span><i class="dotk" style="background:var(--edge)"></i> heures prévues</span>
+    <span><i class="dotk" style="background:var(--done)"></i> heures validées</span>
+    <span><i class="dotk" style="background:var(--gold);border-radius:50%"></i> RPE moyen (effort perçu) /10</span>
+  </div>
+</section>
+
+<details class="foldable" open>
+  <summary>Tes repères — lus sur ton Strava</summary>
+  <div class="fold-body">
+    <p>Séances calibrées sur <b>tes</b> données, pas sur des zones génériques. Corrige si ta montre affiche autre chose.</p>
+
+    <h4>Ce que tu as déjà dans les jambes</h4>
+    <ul>
+      <li><b>Ventoux 87 km / 4 352 D+</b> en 14 h 59 (avril) — la distance et le D+ de la Franco Suisse sont dans ta zone de confort.</li>
+      <li><b>Week-end 9-10 mai : 44 km/2 749 D+ puis 32 km/1 230 D+</b> = ~76 km et ~4 000 D+ en 2 jours. Ton « week-end choc » de S8 est <b>sous</b> ce niveau : aucune inquiétude à avoir.</li>
+      <li><b>10 km en 44:51</b> — ta vitesse de base est un atout rare pour un ultra ; on ne la travaille pas, on l'entretient.</li>
+    </ul>
+
+    <h4>Vitesse ascensionnelle (ton point de mesure clé)</h4>
+    <ul>
+      <li>Frais : <b>~450-480 m/h</b> · en fatigue d'ultra : <b>~320 m/h</b>.</li>
+      <li>Sur la course, table sur <b>~350 m/h</b> en première moitié : 4 000 D+ ≈ 11-12 h rien que pour grimper. C'est ce qui dicte tes horaires de barrières, plus que ta vitesse à plat.</li>
+      <li>Objectif de la prépa : garder 350+ m/h même émoussé. C'est exactement ce que fabriquent les fractionnés en côte et le Mont Agel chronométré.</li>
+    </ul>
+
+    <h4>Allures cibles (base : ton 10 km 44:51)</h4>
+    <ul>
+      <li><b>EF / footing</b> : 5:50-6:30 min/km sur le plat, FC < 160. En côte, l'allure ne veut plus rien dire : pilote à la FC.</li>
+      <li><b>Seuil (séance 2×8')</b> : 4:15-4:35 min/km sur du roulant, FC 177-192.</li>
+      <li><b>Fractionné côte</b> : oublie l'allure, vise FC 161-192 (Z3-Z4) en montée, récup en descente très souple.</li>
+      <li><b>Jour de course</b> : sur les portions courables, ne dépasse <b>jamais</b> 6:00/km même si ça semble facile au km 10. Toutes les montées en marche.</li>
+    </ul>
+
+    <h4>⚠ Tes 3 premières semaines</h4>
+    <p>Après 8 semaines quasi sans courir, ta FC sera 10-15 bpm plus haute qu'au printemps pour la même allure : ton easy est aujourd'hui à ~6:15-6:30/km, pas à 5:15. <b>Pilote à la sensation et à la FC, jamais au chrono</b> — la vitesse reviendra seule en 3-4 semaines. Ne cours pas après tes temps de mai, tu te griller ais.</p>
+
+    <h4>Projection course (indicative)</h4>
+    <p>Au vu du Ventoux et d'un profil Franco Suisse un peu plus roulant, une fourchette <b>16-18 h</b> est réaliste pour un finish confortable. Le plan vise à te faire passer les barrières avec 1 h 30 – 2 h de marge en première moitié : c'est là que se gagne la fin de course.</p>
+  </div>
+</details>
+
+<details class="foldable">
+  <summary>Bibliothèque de parcours — depuis le 5 rue du Guet</summary>
+  <div class="fold-body">
+    <p><b>Fiabilité :</b> les boucles n°1 et n°2 sont des tracés documentés (balisage officiel du Parc de la Grande Corniche). Les autres sont des repères réels avec des km/D+ estimés — vérifie à la montre la première fois et corrige-les ici. La Turbie n'a quasiment pas de plat : ton « footing facile » se fera en vallonné doux, et c'est parfait pour la Franco Suisse.</p>
+
+    <h4>1 · Boucle Tête de Chien — 10 km / 240 D+ (documentée)</h4>
+    <ul><li>Route de la Tête de Chien, balises 600 → 604 → 605, portion de GR51B, retour par le <b>chemin de la Crémaillère</b>. Roulante pour le coin, panorama Monaco. Ton gabarit EF / SL courte de référence.</li></ul>
+
+    <h4>2 · Grande boucle du chemin romain — 14 km / 670 D+ (documentée)</h4>
+    <ul><li>Même départ, balises 600 → 601 → 602a puis le <b>chemin romain</b>, Chapelle St-Roch, Le Justicier, retour par la Crémaillère. Ton gabarit SL 2 h, entièrement au départ de la maison.</li></ul>
+
+    <h4>3 · Fort de la Revère — SL vallonnée</h4>
+    <ul><li>Sur la Grande Corniche entre Èze et La Turbie, accessible plein ouest par le GR51. Aller-retour ou boucle selon la forme. Vérifie la distance ta première fois : c'est plus loin que la Tête de Chien.</li></ul>
+
+    <h4>4 · Mont Agel / Cime de la Forna — la grosse montée</h4>
+    <ul><li>Au-dessus de La Turbie côté Peille/Monaco. <b>Le sommet du Mont Agel est militaire et interdit</b> — l'objectif est la Cime de la Forna et les pistes d'accès. LA montée de référence de ta prépa : chronomètre-la en S5 puis en S10, le progrès sautera aux yeux. Support idéal des fractionnés en côte.</li></ul>
+
+    <h4>5 · Parc de la Grande Corniche / Plateau de la Justice — SL à l'ouest</h4>
+    <ul><li>Plein ouest vers Èze par le GR51 (avenue des Diables Bleus, parcours santé, tables de pique-nique). <b>C'est loin de chez toi</b> — une SL à part entière, pas un footing rapide. Beaux balcons sur mer, enchaînement possible avec le Mont Bastide et le sentier Nietzsche pour du D+ garanti.</li></ul>
+
+    <h4>6 · Week-end choc — retour aux sources mentonnaises</h4>
+    <ul><li>Pour la grosse sortie de S8, vise le col de la Madone / Sainte-Agnès côté est : tes anciens terrains, profils très Franco Suisse. Reconstitue la distance avec un traceur GPX avant de partir.</li></ul>
+
+    <h4>Trajets CHPG La Turbie ↔ Monaco</h4>
+    <ul>
+      <li><b>Descente (matin)</b> : de La Turbie vers le CHPG (Fontvieille), ~430 m de négatif. Trouve ta ligne les premières fois (sentiers, escaliers de Beausoleil, ou route selon le trafic) et fige celle qui te plaît.</li>
+      <li><b>Montée (soir)</b> : le même trajet à l'envers, ~430 D+. Ta séance de montée déguisée, 2-3 fois par semaine — exactement le point faible que tu veux travailler.</li>
+    </ul>
+  </div>
+</details>
+
+<details class="foldable">
+  <summary>Le circuit renfo — 15 à 20 min, zéro matériel</summary>
+  <div class="fold-body">
+    <p>2 à 3 tours selon le temps dispo (1 tour ≈ 6-7 min). Enchaîner sans pause, 1 min entre les tours.</p>
+    <h4>Le tour</h4>
+    <ul>
+      <li><b>15 squats</b> dont les 5 derniers en excentrique lent (5 s de descente) — c'est ton assurance quadriceps pour les 4 000 D- de la course</li>
+      <li><b>10 fentes arrière</b> par jambe</li>
+      <li><b>15 montées de mollet</b> unipodales par jambe (sur une marche)</li>
+      <li><b>Planche 45 s</b> puis <b>planche latérale 30 s</b> par côté</li>
+      <li><b>15 ponts fessiers</b>, unipodaux si facile</li>
+      <li><b>Chaise contre le mur 45 s</b></li>
+    </ul>
+    <h4>Quand</h4>
+    <p>Les jours sans course ou après une séance facile, jamais la veille d'une sortie longue. Pendant le congé paternité : parfait pendant la sieste du bébé.</p>
+  </div>
+</details>
+
+<details class="foldable">
+  <summary>Stratégie course — 3 octobre</summary>
+  <div class="fold-body">
+    <h4>La contrainte garde</h4>
+    <p>Garde 24 h le jeudi 1er octobre, à J-2. Le plan : dormir chaque fois que possible pendant la garde, puis vendredi 2 = <b>repos strict</b> — sieste longue, jambes surélevées, hydratation, assiettes riches en glucides, sac prêt avant 18 h, coucher très tôt. Une nuit blanche à J-2 se rattrape ; à J-1 non. Ta vraie nuit de référence, c'est celle de vendredi.</p>
+    <h4>Allure</h4>
+    <p>Départ volontairement lent : marcher <b>toutes</b> les montées dès le km 1, même celles qui semblent courables. Sur 105 km, la course commence au km 70. Vise des passages aux barrières avec 1 h 30 – 2 h de marge en première moitié.</p>
+    <h4>Nutrition</h4>
+    <p>60 à 80 g de glucides/heure dès la première heure (testés lors du week-end choc et de la SL de S10), 500 ml d'eau + électrolytes/heure, du salé aux ravitos à partir du km 40. Ne jamais quitter un ravito avec les flasques à moitié vides.</p>
+    <h4>Le mental</h4>
+    <p>Découpe en tronçons de ravito à ravito. Tu as fini le Ventoux 87 km/4 352 D+ en avril : la distance est connue, le D+ aussi. La seule inconnue, c'est la fraîcheur — et l'affûtage s'en charge.</p>
+  </div>
+</details>
+
+<div class="databar">
+  <button class="btn g" id="btnExport">Exporter la sauvegarde</button>
+  <button class="btn g" id="btnImport">Importer une sauvegarde</button>
+  <input type="file" id="fileImport" accept="application/json">
+</div>
+<div class="foot">FROHLICH · La Turbie → Léman · données stockées sur cet appareil</div>
+
+</div>
+<div class="toast" id="toast"></div>
+<script>
+/* ============== DATA ============== */
+const RACE = new Date(2026,9,3);
+const WEEKS = [
+ {w:1, label:"Reprise 1", dates:"13 – 19 juil", kind:"base",
+  note:"Après 8 semaines de quasi-arrêt, l'objectif unique : recréer l'habitude sans douleur. Tout en aisance respiratoire (Z1-Z2, FC < 160)."},
+ {w:2, label:"Reprise 2", dates:"20 – 26 juil", kind:"base",
+  note:"Garde mardi 21 → séance légère lundi, repos mercredi. Premiers trajets courus dans les deux sens."},
+ {w:3, label:"Semaine bébé", dates:"27 juil – 2 août", kind:"baby",
+  note:"👶 Terme le 29 juillet. Tout est optionnel et interchangeable ici : le sommeil et la famille priment. Deux sorties courtes depuis la maison si l'occasion se présente, sinon on efface et on n'y pense plus."},
+ {w:4, label:"Reconstruction", dates:"3 – 9 août", kind:"base",
+  note:"Congé paternité : des créneaux courts mais souples. Retour du travail de côte en douceur."},
+ {w:5, label:"Charge 1", dates:"10 – 16 août", kind:"charge",
+  note:"Le D+ devient la priorité. Première vraie sortie longue en montagne depuis mai."},
+ {w:6, label:"Charge 2", dates:"17 – 23 août", kind:"charge",
+  note:"Plus grosse semaine du congé paternité. Sortie 3 h avec bâtons et test de la nutrition de course (60 g de glucides/h)."},
+ {w:7, label:"Assimilation + reprise CHPG", dates:"24 – 30 août", kind:"base",
+  note:"Retour au travail le 25 : les trajets courus reprennent le relais. Volume contenu pour arriver frais au week-end choc."},
+ {w:8, label:"Week-end choc ⚡", dates:"31 août – 6 sept", kind:"choc",
+  warn:"Semaine exception (~7 h 30, au-dessus de ton plafond de 6 h) — validée ensemble : c'est la répétition générale qui remplace la course intermédiaire. Garde mardi 1er sept, repos mercredi.",
+  note:""},
+ {w:9, label:"Assimilation", dates:"7 – 13 sept", kind:"base",
+  note:"On encaisse le choc. Si les jambes sont lourdes au-delà de mercredi, coupe encore une séance sans culpabilité."},
+ {w:10, label:"Pic final", dates:"14 – 20 sept", kind:"pic",
+  note:"Dernière grosse semaine. La SL de samedi se fait avec le matériel course complet — après elle, plus rien de long."},
+ {w:11, label:"Affûtage 1", dates:"21 – 27 sept", kind:"taper",
+  note:"Le volume chute, l'intensité reste par petites touches. La fatigue s'évapore, la forme monte."},
+ {w:12, label:"Semaine course 🏁", dates:"28 sept – 3 oct", kind:"taper",
+  warn:"Garde jeudi 1er oct à J-2 : dors dès que possible pendant la garde, vendredi = repos strict + sieste. Voir « Stratégie course » plus bas.",
+  note:""}
+];
+const S = [
+ /* S1 */
+ {id:"s1a",w:1,d:"2026-07-14",day:"Mar 14",type:"EF",t:"Reprise en douceur",dur:40,km:7,dp:100,x:"Roulant, allure conversation stricte. Après 8 semaines off, ta FC sera haute : vise FC < 160 et ~6:15-6:30/km, sans regarder le chrono. Si ça pique, marche."},
+ {id:"s1b",w:1,d:"2026-07-16",day:"Jeu 16",type:"TRAJ",t:"Retour CHPG → La Turbie ↑",dur:50,km:6.5,dp:430,x:"Rando-course : course sur le doux, marche tonique mains sur les cuisses dans le raide. C'est LE geste Franco Suisse."},
+ {id:"s1c",w:1,d:"2026-07-18",day:"Sam 18",type:"SL",t:"Découverte Tête de Chien",dur:75,km:10,dp:400,x:"1 h 15 mixte course/marche — boucle documentée n°1 (Tête de Chien, 10 km), l'occasion de découvrir ton nouveau terrain de jeu."},
+ {id:"s1r",w:1,d:"2026-07-17",day:"Ven 17",type:"RENFO",t:"Circuit renfo × 2 tours",dur:15,km:0,dp:0,x:"Voir « Le circuit renfo » en bas de page. Version courte pour reprendre."},
+ /* S2 */
+ {id:"s2a",w:2,d:"2026-07-20",day:"Lun 20",type:"EF",t:"Footing veille de garde",dur:40,km:7,dp:50,x:"Souple, terrain plat ou léger faux-plat. On arrive frais à la garde."},
+ {id:"s2g",w:2,d:"2026-07-21",day:"Mar 21",type:"GARDE",t:"Garde 24 h",info:1,x:"Dormir dès que possible."},
+ {id:"s2h",w:2,d:"2026-07-22",day:"Mer 22",type:"REPOS",t:"Repos post-garde",info:1,x:"Sieste, marche tranquille au mieux."},
+ {id:"s2b",w:2,d:"2026-07-23",day:"Jeu 23",type:"TRAJ",t:"Retour montée ↑",dur:50,km:6.5,dp:430,x:"Z2 max. La régularité prime sur le chrono de la montée."},
+ {id:"s2c",w:2,d:"2026-07-24",day:"Ven 24",type:"TRAJ",t:"Aller descente ↓",dur:40,km:6.5,dp:0,x:"La Turbie → CHPG, douche à l'arrivée. Descente relâchée : petits pas, fréquence haute, regard loin. -430 m d'apprentissage."},
+ {id:"s2d",w:2,d:"2026-07-26",day:"Dim 26",type:"SL",t:"Sortie longue vallonnée",dur:90,km:11,dp:550,x:"1 h 30 en aisance, marche assumée dans les montées."},
+ {id:"s2r",w:2,d:"2026-07-25",day:"Sam 25",type:"RENFO",t:"Circuit renfo × 2 tours",dur:15,km:0,dp:0,x:"Accent sur les squats excentriques."},
+ /* S3 */
+ {id:"s3a",w:3,d:"2026-07-27",day:"Lun 27",type:"TRAJ",t:"Aller-retour trajet ↓↑",dur:90,km:13,dp:430,x:"Descente le matin (40'), remontée le soir (50'). Dernier gros jour avant le congé."},
+ {id:"s3g",w:3,d:"2026-07-29",day:"Mer 29",type:"FLEX",t:"👶 Terme — début congé paternité",info:1,x:"Félicitations. Le plan attendra."},
+ {id:"s3b",w:3,d:"",day:"Flex",type:"FLEX",t:"Sortie éclair n°1",dur:40,km:7,dp:100,x:"40' depuis la maison, n'importe quel jour, n'importe quelle heure. Décompression."},
+ {id:"s3c",w:3,d:"",day:"Flex",type:"FLEX",t:"Sortie éclair n°2",dur:45,km:7.5,dp:150,x:"45' vallonné au feeling. Optionnelle — zéro culpabilité si elle saute."},
+ /* S4 */
+ {id:"s4a",w:4,d:"2026-08-04",day:"Mar 4",type:"EF",t:"Footing vallonné",dur:50,km:8,dp:250,x:"Z2, sur les sentiers autour de la maison."},
+ {id:"s4b",w:4,d:"2026-08-06",day:"Jeu 6",type:"DP",t:"Fractionné côte 8 × 1'",dur:60,km:7,dp:400,x:"20' EF puis 8 × 1' de montée dynamique (course ou marche rapide), récup descente souple, 15' retour au calme."},
+ {id:"s4c",w:4,d:"2026-08-08",day:"Sam 8",type:"SL",t:"Sortie longue",dur:105,km:12,dp:700,x:"1 h 45. Réintroduis les bâtons si tu comptes les utiliser en course."},
+ {id:"s4r1",w:4,d:"2026-08-03",day:"Lun 3",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:"Version complète, 20'."},
+ {id:"s4r2",w:4,d:"2026-08-07",day:"Ven 7",type:"RENFO",t:"Circuit renfo × 2 tours",dur:15,km:0,dp:0,x:"Pendant la sieste du petit."},
+ /* S5 */
+ {id:"s5a",w:5,d:"2026-08-11",day:"Mar 11",type:"EF",t:"Footing + lignes droites",dur:45,km:8,dp:100,x:"40' Z2 puis 6 lignes droites en accélération progressive."},
+ {id:"s5b",w:5,d:"2026-08-13",day:"Jeu 13",type:"DP",t:"Fractionné côte 6 × 3'",dur:75,km:9,dp:500,x:"Échauffement 20', puis 6 × 3' en montée dur mais maîtrisé — pilote à la FC (161-192), pas à l'allure. Récup descente très souple. C'est la séance qui te garde à 350+ m/h en fatigue le jour J."},
+ {id:"s5c",w:5,d:"2026-08-16",day:"Dim 16",type:"SL",t:"Mont Agel",dur:135,km:15,dp:900,x:"2 h 15 vers la Cime de la Forna (sommet Agel interdit). Chronomètre la montée : c'est ton test de VAM. Objectif > 400 m/h à froid. Gestion type course : marche rando en montée, descente appliquée. À refaire en S10 pour mesurer le gain."},
+ {id:"s5r1",w:5,d:"2026-08-10",day:"Lun 10",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:""},
+ {id:"s5r2",w:5,d:"2026-08-14",day:"Ven 14",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:""},
+ /* S6 */
+ {id:"s6a",w:6,d:"2026-08-18",day:"Mar 18",type:"DP",t:"Seuil 2 × 8'",dur:55,km:9.5,dp:100,x:"15' EF, puis 2 × 8' au seuil : 4:15-4:35/km sur du roulant, FC 177-192, récup 3' trot, retour au calme. Entretient ta vitesse de base (tu tiens 44:51 au 10 km) sans te creuser."},
+ {id:"s6b",w:6,d:"2026-08-20",day:"Jeu 20",type:"DP",t:"Montée longue continue",dur:90,km:10,dp:650,x:"La Turbie → Agel en continu, Z2 haut / Z3 bas, sans exploser. Descente technique concentrée : c'est elle qui casse les quadris le jour J."},
+ {id:"s6c",w:6,d:"2026-08-22",day:"Sam 22",type:"SL",t:"Grande boucle Agel – Madone",dur:180,km:19,dp:1200,x:"3 h, bâtons, sac de course — les hauteurs du Mont Agel / Forna (n°4) puis crête vers la Madone. Test nutrition grandeur nature : 60 g de glucides/h dès la première heure, note ce qui passe bien."},
+ {id:"s6d",w:6,d:"2026-08-23",day:"Dim 23",type:"EF",t:"Récup active (optionnelle)",dur:40,km:6,dp:100,x:"40' très lent sur jambes fatiguées — utile mais sautable."},
+ {id:"s6r1",w:6,d:"2026-08-17",day:"Lun 17",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:""},
+ {id:"s6r2",w:6,d:"2026-08-21",day:"Ven 21",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:""},
+ /* S7 */
+ {id:"s7a",w:7,d:"2026-08-25",day:"Mar 25",type:"TRAJ",t:"Retour montée ↑ (reprise CHPG)",dur:50,km:6.5,dp:430,x:"Retour au travail = retour des trajets. Z2, sac léger."},
+ {id:"s7b",w:7,d:"2026-08-27",day:"Jeu 27",type:"TRAJ",t:"Aller descente ↓ (+ retour si la forme est là)",dur:40,km:6.5,dp:60,x:"Descente le matin. Le retour du soir en option : écoute les jambes, le week-end choc arrive."},
+ {id:"s7c",w:7,d:"2026-08-30",day:"Dim 30",type:"SL",t:"Sortie longue modérée",dur:120,km:14,dp:800,x:"2 h faciles. On garde du jus : la vraie échéance, c'est samedi prochain."},
+ {id:"s7r",w:7,d:"2026-08-28",day:"Ven 28",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:"Dernier renfo avant le choc."},
+ /* S8 */
+ {id:"s8a",w:8,d:"2026-08-31",day:"Lun 31",type:"EF",t:"Footing léger veille de garde",dur:40,km:7,dp:50,x:"Court et souple."},
+ {id:"s8g",w:8,d:"2026-09-01",day:"Mar 1",type:"GARDE",t:"Garde 24 h",info:1,x:"Dors quand tu peux : samedi se prépare aussi là."},
+ {id:"s8h",w:8,d:"2026-09-02",day:"Mer 2",type:"REPOS",t:"Repos post-garde",info:1,x:"Sieste obligatoire."},
+ {id:"s8b",w:8,d:"2026-09-03",day:"Jeu 3",type:"TRAJ",t:"Retour montée ↑ très facile",dur:45,km:6.5,dp:430,x:"Z1-Z2 strict, jambes légères pour samedi."},
+ {id:"s8c",w:8,d:"2026-09-05",day:"Sam 5",type:"SL",t:"CHOC 1 — répétition générale",dur:240,km:26,dp:1600,x:"4 h, sac + bâtons + tenue + nutrition 100 % course — n°6 : retrouve tes terres mentonnaises via la Madone et Sainte-Agnès. Allure cible barrières : marche toutes les montées, mange toutes les 30'. C'est un test, pas une course."},
+ {id:"s8d",w:8,d:"2026-09-06",day:"Dim 6",type:"SL",t:"CHOC 2 — sur jambes fatiguées",dur:120,km:14,dp:700,x:"2 h le lendemain, tout en aisance. Apprendre à avancer fatigué : exactement la sensation du km 70."},
+ /* S9 */
+ {id:"s9a",w:9,d:"2026-09-09",day:"Mer 9",type:"EF",t:"Footing de décrassage",dur:40,km:7,dp:80,x:"Très souple. Les courbatures du choc sont normales jusqu'à mardi."},
+ {id:"s9b",w:9,d:"2026-09-11",day:"Ven 11",type:"TRAJ",t:"Retour montée ↑",dur:50,km:6.5,dp:430,x:"Z2 tranquille."},
+ {id:"s9c",w:9,d:"2026-09-13",day:"Dim 13",type:"SL",t:"Sortie moyenne",dur:105,km:13,dp:500,x:"1 h 45 vallonné, au plaisir."},
+ {id:"s9r",w:9,d:"2026-09-10",day:"Jeu 10",type:"RENFO",t:"Circuit renfo × 2 tours",dur:15,km:0,dp:0,x:"Version légère."},
+ /* S10 */
+ {id:"s10a",w:10,d:"2026-09-15",day:"Mar 15",type:"TRAJ",t:"Aller-retour trajet ↓↑",dur:90,km:13,dp:450,x:"Descente le matin (40'), remontée le soir (50'). Journée à 90' sans y penser."},
+ {id:"s10b",w:10,d:"2026-09-17",day:"Jeu 17",type:"DP",t:"Fractionné côte 5 × 4'",dur:60,km:7,dp:450,x:"5 × 4' en montée Z3, récup descente. Dernière séance dure de la préparation."},
+ {id:"s10c",w:10,d:"2026-09-19",day:"Sam 19",type:"SL",t:"Dernière grande sortie",dur:180,km:19,dp:1300,x:"3 h matériel course complet. Dernier réglage nutrition + chaussures définitives. Après elle : plus rien de long, promis."},
+ {id:"s10r1",w:10,d:"2026-09-14",day:"Lun 14",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:""},
+ {id:"s10r2",w:10,d:"2026-09-18",day:"Ven 18",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:""},
+ /* S11 */
+ {id:"s11a",w:11,d:"2026-09-22",day:"Mar 22",type:"TRAJ",t:"Retour montée ↑ souple",dur:45,km:6,dp:430,x:"Z2, sans forcer."},
+ {id:"s11b",w:11,d:"2026-09-24",day:"Jeu 24",type:"EF",t:"Footing + relances",dur:45,km:8,dp:150,x:"35' Z2 puis 6 × 30\" de relances en légère côte. Garder l'étincelle sans creuser."},
+ {id:"s11c",w:11,d:"2026-09-27",day:"Dim 27",type:"SL",t:"Trail plaisir",dur:90,km:11,dp:500,x:"1 h 30 max. Le dernier vrai contact avec les sentiers avant le grand jour."},
+ {id:"s11r",w:11,d:"2026-09-23",day:"Mer 23",type:"RENFO",t:"Circuit renfo × 2 tours (dernier)",dur:15,km:0,dp:0,x:"Dernier de la préparation."},
+ /* S12 */
+ {id:"s12a",w:12,d:"2026-09-28",day:"Lun 28",type:"EF",t:"Footing + 4 lignes droites",dur:30,km:5.5,dp:50,x:"30' souple, 4 accélérations progressives."},
+ {id:"s12b",w:12,d:"2026-09-30",day:"Mer 30",type:"EF",t:"Déblocage veille de garde",dur:25,km:4.5,dp:50,x:"25' très facile. Rien à gagner, tout à préserver."},
+ {id:"s12g",w:12,d:"2026-10-01",day:"Jeu 1",type:"GARDE",t:"Garde 24 h (J-2)",info:1,x:"Dormir dès que possible. Hydratation ++ pendant la garde."},
+ {id:"s12h",w:12,d:"2026-10-02",day:"Ven 2",type:"REPOS",t:"Repos strict J-1",info:1,x:"Sieste longue, jambes surélevées, glucides, sac bouclé avant 18 h, coucher très tôt."},
+ {id:"s12c",w:12,d:"2026-10-03",day:"Sam 3",type:"COURSE",t:"🏁 FRANCO SUISSE — 105 km / 4 000 D+",dur:0,km:105,dp:4000,x:"Départ prudent, marche toutes les montées, 60-80 g de glucides/h, tronçon par tronçon. Tu as le Ventoux dans les jambes — cours TA course."}
+];
+</script>
+<script>
+/* ============== STATE ============== */
+const KEY='fs2026_state';
+let mem={};
+const store={
+  load(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return mem; } },
+  save(st){ try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){ mem=st; } }
+};
+let state=store.load();
+
+const $=s=>document.querySelector(s);
+const fmtH=m=>{const h=Math.floor(m/60),mn=m%60;return h?`${h} h${mn? ' '+String(mn).padStart(2,'0'):''}`:`${mn}'`};
+const runTypes=new Set(['EF','DP','TRAJ','SL','COURSE']);
+const kindColor={base:'var(--lichen)',charge:'var(--flag)',choc:'var(--gold)',pic:'var(--gold)',taper:'var(--slate)',baby:'#D98FB6'};
+
+function weekSessions(w){return S.filter(s=>s.w===w);}
+function checkable(w){return weekSessions(w).filter(s=>!s.info);}
+function weekPlanned(w){return checkable(w).filter(s=>runTypes.has(s.type)).reduce((a,s)=>a+s.dur,0);}
+function weekKm(w){return checkable(w).filter(s=>runTypes.has(s.type)).reduce((a,s)=>a+(s.km||0),0);}
+function weekDone(w){return checkable(w).filter(s=>runTypes.has(s.type)&&state[s.id]?.done).reduce((a,s)=>a+s.dur,0);}
+function weekFeel(w){const f=checkable(w).map(s=>state[s.id]).filter(v=>v?.done&&v.feel).map(v=>v.feel);return f.length?f.reduce((a,b)=>a+b,0)/f.length:null;}
+
+/* ---- current week ---- */
+function curWeek(){
+  const t=new Date(); t.setHours(0,0,0,0);
+  const start=new Date(2026,6,13);
+  const diff=Math.floor((t-start)/864e5);
+  return Math.min(12,Math.max(1,Math.floor(diff/7)+1));
+}
+const CW=curWeek();
+
+/* ============== COUNTDOWN ============== */
+(function(){
+  const n=new Date(); n.setHours(0,0,0,0);
+  const d=Math.round((RACE-n)/864e5);
+  $('#jj').textContent = d>0?('J-'+d):(d===0?'JOUR J':'FINI 🏆');
+})();
+
+/* ============== RIDGE (hero) ============== */
+function drawRidge(){
+  const svg=$('#ridge'); svg.innerHTML='';
+  const W=720,H=190,base=168,n=WEEKS.length,seg=W/n;
+  const maxM=Math.max(...WEEKS.map(k=>weekPlanned(k.w)));
+  const NS='http://www.w3.org/2000/svg';
+  WEEKS.forEach((wk,i)=>{
+    const m=weekPlanned(wk.w);
+    const h=28+(m/maxM)*118;
+    const x0=i*seg, xm=x0+seg/2, x1=x0+seg;
+    const yTop=base-h;
+    const g=document.createElementNS(NS,'g');
+    const poly=document.createElementNS(NS,'polygon');
+    poly.setAttribute('points',`${x0},${base} ${xm},${yTop} ${x1},${base}`);
+    poly.setAttribute('fill','var(--pine2)');
+    poly.setAttribute('stroke', wk.w===CW?'var(--flag)':'var(--edge)');
+    poly.setAttribute('stroke-width', wk.w===CW?2.5:1.2);
+    g.appendChild(poly);
+    // done fill (clip from bottom)
+    const pl=weekPlanned(wk.w), dn=weekDone(wk.w);
+    if(pl&&dn){
+      const pct=Math.min(1,dn/pl);
+      const clip=document.createElementNS(NS,'clipPath');
+      const cid='c'+i; clip.setAttribute('id',cid);
+      const r=document.createElementNS(NS,'rect');
+      r.setAttribute('x',x0);r.setAttribute('y',base-h*pct);
+      r.setAttribute('width',seg);r.setAttribute('height',h*pct);
+      clip.appendChild(r); svg.appendChild(clip);
+      const p2=document.createElementNS(NS,'polygon');
+      p2.setAttribute('points',poly.getAttribute('points'));
+      p2.setAttribute('fill',kindColor[wk.kind]);
+      p2.setAttribute('opacity','0.85');
+      p2.setAttribute('clip-path',`url(#${cid})`);
+      g.appendChild(p2);
+    }
+    // week label
+    const tx=document.createElementNS(NS,'text');
+    tx.setAttribute('x',xm);tx.setAttribute('y',184);
+    tx.setAttribute('text-anchor','middle');
+    tx.setAttribute('font-size','11');
+    tx.setAttribute('font-family','JetBrains Mono,monospace');
+    tx.setAttribute('fill', wk.w===CW?'var(--flag)':'var(--mist)');
+    tx.textContent='S'+wk.w;
+    g.appendChild(tx);
+    // hours label on peak
+    const th=document.createElementNS(NS,'text');
+    th.setAttribute('x',xm);th.setAttribute('y',yTop-6);
+    th.setAttribute('text-anchor','middle');
+    th.setAttribute('font-size','10');
+    th.setAttribute('font-family','JetBrains Mono,monospace');
+    th.setAttribute('fill','var(--stone)');
+    th.textContent=(weekPlanned(wk.w)/60).toFixed(1).replace('.',',');
+    g.appendChild(th);
+    // flag on last peak
+    if(i===n-1){
+      const fl=document.createElementNS(NS,'text');
+      fl.setAttribute('x',xm+4);fl.setAttribute('y',yTop-16);
+      fl.setAttribute('text-anchor','middle');fl.setAttribute('font-size','16');
+      fl.textContent='🏁'; g.appendChild(fl);
+    }
+    g.addEventListener('click',()=>{
+      const el=document.getElementById('week'+wk.w);
+      document.querySelectorAll('.week').forEach(x=>x.classList.remove('open'));
+      el.classList.add('open'); el.scrollIntoView({behavior:'smooth'});
+    });
+    svg.appendChild(g);
+  });
+  // baseline
+  const ln=document.createElementNS(NS,'line');
+  ln.setAttribute('x1',0);ln.setAttribute('x2',W);
+  ln.setAttribute('y1',base);ln.setAttribute('y2',base);
+  ln.setAttribute('stroke','var(--edge)');ln.setAttribute('stroke-width','1.5');
+  svg.appendChild(ln);
+}
+
+/* ============== STATS ============== */
+function drawStats(){
+  const all=S.filter(s=>!s.info);
+  const runs=all.filter(s=>runTypes.has(s.type)&&s.type!=='COURSE');
+  const renfos=all.filter(s=>s.type==='RENFO');
+  const doneRuns=runs.filter(s=>state[s.id]?.done);
+  const doneRenfos=renfos.filter(s=>state[s.id]?.done);
+  const xs=extras();
+  const xKm=xs.reduce((a,x)=>a+(x.km||0),0), xDp=xs.reduce((a,x)=>a+(x.dp||0),0);
+  const hDone=doneRuns.reduce((a,s)=>a+s.dur,0), hPlan=runs.reduce((a,s)=>a+s.dur,0);
+  const kmDone=Math.round(doneRuns.reduce((a,s)=>a+(state[s.id]?.km??s.km??0),0)+xKm), kmPlan=Math.round(runs.reduce((a,s)=>a+(s.km||0),0));
+  const dpDone=doneRuns.reduce((a,s)=>a+(state[s.id]?.dp??s.dp??0),0)+xDp, dpPlan=runs.reduce((a,s)=>a+s.dp,0);
+  const feels=all.map(s=>state[s.id]).filter(v=>v?.done&&v.feel).map(v=>v.feel).concat(xs.map(x=>x.rpe).filter(Boolean));
+  const avg=feels.length?(feels.reduce((a,b)=>a+b,0)/feels.length).toFixed(1):'–';
+  // dénominateur : on retire les séances reportées
+  const denom=runs.filter(s=>!state[s.id]?.postponed).length;
+  const pct=denom?Math.round(doneRuns.length/denom*100):0;
+  $('#stats').innerHTML=`
+    <div class="stat hl"><div class="v">${pct}<em> %</em></div><div class="k">séances validées (${doneRuns.length}/${denom})${xs.length?' +'+xs.length+' libre'+(xs.length>1?'s':''):''}</div></div>
+    <div class="stat"><div class="v">${fmtH(hDone)}<em> / ${fmtH(hPlan)}</em></div><div class="k">heures de course</div></div>
+    <div class="stat"><div class="v">${kmDone}<em> / ${kmPlan} km</em></div><div class="k">kilomètres${xKm?' (dont '+Math.round(xKm)+' libres)':''}</div></div>
+    <div class="stat"><div class="v">${dpDone.toLocaleString('fr')}<em> / ${dpPlan.toLocaleString('fr')} m</em></div><div class="k">D+ cumulé</div></div>
+    <div class="stat"><div class="v">${avg}<em> /10</em></div><div class="k">RPE moyen (effort) · renfos ${doneRenfos.length}/${renfos.length}</div></div>`;
+}
+
+/* ============== TODAY ============== */
+function drawToday(){
+  const t=new Date(); const iso=t.toISOString().slice(0,10);
+  let s=S.find(x=>x.d===iso);
+  if(!s){ s=S.filter(x=>x.d&&x.d>iso&&!x.info).sort((a,b)=>a.d<b.d?-1:1)[0]; }
+  if(!s){ $('#today').innerHTML=''; return; }
+  const isToday=s.d===iso;
+  $('#today').innerHTML=`
+   <div class="today-card" role="button" tabindex="0" onclick="gotoWeek(${s.w})" onkeydown="if(event.key==='Enter')gotoWeek(${s.w})">
+     <div class="when">${isToday?"Aujourd'hui":"Prochaine séance — "+s.day}</div>
+     <h3>${s.t}</h3>
+     <p>${s.info? s.x : fmtH(s.dur)+(s.km?` · ${s.km.toLocaleString('fr')} km`:'')+(s.dp?` · ${s.dp} D+`:'')+' — '+s.x}</p>
+   </div>`;
+}
+function gotoWeek(w){
+  const el=document.getElementById('week'+w);
+  el.classList.add('open'); el.scrollIntoView({behavior:'smooth'});
+}
+
+/* ============== WEEKS ============== */
+function badgeLbl(t){return {EF:'EF',DP:'D+',TRAJ:'TRAJET',SL:'LONG',RENFO:'RENFO',GARDE:'GARDE',REPOS:'REPOS',COURSE:'COURSE',FLEX:'FLEX'}[t];}
+function drawWeeks(){
+  const root=$('#weeks'); root.innerHTML='';
+  WEEKS.forEach(wk=>{
+    const sess=weekSessions(wk.w);
+    const chk=checkable(wk.w);
+    const active=chk.filter(s=>!state[s.id]?.postponed);
+    const nDone=chk.filter(s=>state[s.id]?.done).length;
+    const pl=weekPlanned(wk.w), dpl=chk.filter(s=>runTypes.has(s.type)).reduce((a,s)=>a+s.dp,0);
+    const div=document.createElement('div');
+    div.className='week'+(wk.w===CW?' cur open':'');
+    div.id='week'+wk.w;
+    div.innerHTML=`
+      <div class="wk-head" onclick="this.parentNode.classList.toggle('open')">
+        <span class="wk-num">S${wk.w}</span>
+        <span class="wk-title"><b>${wk.label}</b><span>${wk.dates} · ${nDone}/${active.length} faites</span></span>
+        <span class="wk-load"><b>${fmtH(pl)}</b><br>${weekKm(wk.w).toLocaleString('fr')} km · ${dpl.toLocaleString('fr')} D+</span>
+      </div>
+      <div class="wk-prog"><i style="width:${active.length?Math.round(nDone/active.length*100):0}%"></i></div>
+      <div class="wk-body">
+        ${wk.warn?`<div class="wk-note warn">${wk.warn}</div>`:''}
+        ${wk.note?`<div class="wk-note${wk.kind==='baby'?' baby':''}">${wk.note}</div>`:''}
+        ${sess.map(s=>sessHTML(s)).join('')}
+      </div>`;
+    root.appendChild(div);
+  });
+}
+function sessHTML(s){
+  const st=state[s.id]||{};
+  const meta=s.info?'':`${s.dur?fmtH(s.dur)+' · ':''}${s.km?s.km.toLocaleString('fr')+' km':''}${s.dp?` · ${s.dp.toLocaleString('fr')} D+`:''}`;
+  const canReport = !s.info && !st.done;
+  return `
+  <div class="sess ${s.info?'info':''} ${st.done?'checked':''} ${st.postponed?'postponed':''}" id="row_${s.id}">
+    <button class="chk" aria-label="Valider la séance" onclick="toggle('${s.id}')">${st.done?'✓':''}</button>
+    <div class="s-main">
+      <div class="s-top">
+        <span class="s-day">${s.day}</span>
+        <span class="badge b-${s.type}">${badgeLbl(s.type)}</span>
+        <span class="s-title">${s.t}</span>
+        ${st.postponed?'<span class="tag-report">reportée</span>':''}
+      </div>
+      ${meta?`<div class="s-meta">${meta}</div>`:''}
+      ${s.x?`<div class="s-desc">${s.x}</div>`:''}
+      ${st.done?`<span class="feel-chip" onclick="edit('${s.id}')">${st.dateDone?fmtDate(st.dateDone)+' · ':''}RPE ${st.feel||'–'}/10${(st.km||st.dp)?' · '+(st.km?st.km+' km':'')+(st.km&&st.dp?'/':'')+(st.dp?st.dp+' D+':''):''}${st.note?' · '+esc(st.note):''} ✎</span>`:''}
+      ${canReport?`<div class="mini-actions"><button onclick="postpone('${s.id}')">${st.postponed?'↩ reprendre':'⤳ décaler'}</button></div>`:''}
+      <div class="feel-box" id="fb_${s.id}">
+        <label>Effort perçu — RPE <b id="fv_${s.id}">${st.feel||5}</b></label>
+        <div style="font-size:10px;color:var(--stone);font-family:'JetBrains Mono',monospace;margin:-4px 0 2px">1 = très facile · 10 = maximal</div>
+        <input type="range" min="1" max="10" value="${st.feel||5}" id="fr_${s.id}"
+          oninput="document.getElementById('fv_${s.id}').textContent=this.value">
+        <div class="grid2">
+          <div class="fld"><small>Fait le</small><input type="date" id="fdt_${s.id}" value="${st.dateDone||s.d||todayISO()}" max="${todayISO()}"></div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><small>km réels</small><input type="number" inputmode="decimal" step="0.1" min="0" id="fkm_${s.id}" placeholder="${s.km||''}" value="${st.km||''}"></div>
+          <div class="fld"><small>D+ réels</small><input type="number" inputmode="numeric" step="10" min="0" id="fdp_${s.id}" placeholder="${s.dp||''}" value="${st.dp||''}"></div>
+        </div>
+        <input type="text" id="fn_${s.id}" maxlength="80" placeholder="Note (optionnel) : météo, sensations, douleur…" value="${st.note?esc(st.note):''}">
+        <div class="row">
+          <button class="btn p" onclick="saveFeel('${s.id}')">Enregistrer</button>
+          <button class="btn g" onclick="cancelFeel('${s.id}')">Annuler</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+function esc(t){return String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+/* ============== ACTIONS ============== */
+function toggle(id){
+  const st=state[id]||{};
+  if(st.done){ // uncheck
+    delete state[id]; store.save(state); refresh(); toast('Séance décochée');
+  }else{
+    document.getElementById('row_'+id).classList.add('editing','checked');
+    document.getElementById('row_'+id).querySelector('.chk').textContent='✓';
+  }
+}
+function edit(id){ document.getElementById('row_'+id).classList.add('editing'); }
+function saveFeel(id){
+  const feel=+document.getElementById('fr_'+id).value;
+  const note=document.getElementById('fn_'+id).value.trim();
+  const dateDone=document.getElementById('fdt_'+id).value||todayISO();
+  const kmv=parseFloat(document.getElementById('fkm_'+id).value);
+  const dpv=parseInt(document.getElementById('fdp_'+id).value,10);
+  const rec={done:true,feel,note,dateDone,ts:Date.now()};
+  if(!isNaN(kmv)&&kmv>0) rec.km=Math.round(kmv*10)/10;
+  if(!isNaN(dpv)&&dpv>0) rec.dp=dpv;
+  state[id]=rec;
+  store.save(state); refresh(); toast('Validée le '+fmtDate(dateDone)+' · RPE '+feel+'/10');
+}
+function todayISO(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function fmtDate(iso){if(!iso)return'';const[y,m,d]=iso.split('-');return d+'/'+m;}
+function cancelFeel(id){
+  const row=document.getElementById('row_'+id);
+  row.classList.remove('editing');
+  if(!state[id]?.done){ row.classList.remove('checked'); row.querySelector('.chk').textContent=''; }
+}
+
+/* ============== CHART ============== */
+function drawChart(){
+  const svg=$('#chart'); svg.innerHTML='';
+  const NS='http://www.w3.org/2000/svg';
+  const W=720,H=240,padL=34,padB=26,padT=14;
+  const bw=(W-padL-10)/WEEKS.length;
+  const maxM=Math.max(...WEEKS.map(k=>weekPlanned(k.w)));
+  const y=m=>H-padB-(m/maxM)*(H-padB-padT);
+  // grid hours
+  for(let h=2;h*60<=maxM;h+=2){
+    const gy=y(h*60);
+    const l=document.createElementNS(NS,'line');
+    l.setAttribute('x1',padL);l.setAttribute('x2',W-6);
+    l.setAttribute('y1',gy);l.setAttribute('y2',gy);
+    l.setAttribute('stroke','var(--edge)');l.setAttribute('stroke-dasharray','2 4');
+    svg.appendChild(l);
+    const t=document.createElementNS(NS,'text');
+    t.setAttribute('x',padL-6);t.setAttribute('y',gy+3);
+    t.setAttribute('text-anchor','end');t.setAttribute('font-size','10');
+    t.setAttribute('font-family','JetBrains Mono,monospace');t.setAttribute('fill','var(--stone)');
+    t.textContent=h+'h'; svg.appendChild(t);
+  }
+  const feelPts=[];
+  WEEKS.forEach((wk,i)=>{
+    const pl=weekPlanned(wk.w), dn=weekDone(wk.w);
+    const x=padL+i*bw+bw*0.18, w=bw*0.64;
+    const r1=document.createElementNS(NS,'rect');
+    r1.setAttribute('x',x);r1.setAttribute('y',y(pl));
+    r1.setAttribute('width',w);r1.setAttribute('height',H-padB-y(pl));
+    r1.setAttribute('fill','var(--edge)');r1.setAttribute('rx','3');
+    svg.appendChild(r1);
+    if(dn){
+      const r2=document.createElementNS(NS,'rect');
+      r2.setAttribute('x',x);r2.setAttribute('y',y(Math.min(dn,pl*1.15)));
+      r2.setAttribute('width',w);r2.setAttribute('height',H-padB-y(Math.min(dn,pl*1.15)));
+      r2.setAttribute('fill','var(--done)');r2.setAttribute('rx','3');
+      svg.appendChild(r2);
+    }
+    const fl=weekFeel(wk.w);
+    if(fl) feelPts.push({x:x+w/2, y:padT+ (1-(fl-1)/9)*(H-padB-padT), v:fl});
+    const tx=document.createElementNS(NS,'text');
+    tx.setAttribute('x',x+w/2);tx.setAttribute('y',H-10);
+    tx.setAttribute('text-anchor','middle');tx.setAttribute('font-size','10');
+    tx.setAttribute('font-family','JetBrains Mono,monospace');
+    tx.setAttribute('fill',wk.w===CW?'var(--flag)':'var(--stone)');
+    tx.textContent='S'+wk.w; svg.appendChild(tx);
+  });
+  if(feelPts.length>1){
+    const p=document.createElementNS(NS,'polyline');
+    p.setAttribute('points',feelPts.map(pt=>pt.x+','+pt.y).join(' '));
+    p.setAttribute('fill','none');p.setAttribute('stroke','var(--gold)');
+    p.setAttribute('stroke-width','2');p.setAttribute('opacity','.9');
+    svg.appendChild(p);
+  }
+  feelPts.forEach(pt=>{
+    const c=document.createElementNS(NS,'circle');
+    c.setAttribute('cx',pt.x);c.setAttribute('cy',pt.y);c.setAttribute('r','4');
+    c.setAttribute('fill','var(--gold)');svg.appendChild(c);
+  });
+}
+
+/* ============== POSTPONE / EXTRAS / GUARD ============== */
+/* ---- postpone / report ---- */
+function postpone(id){
+  const st=state[id]||{};
+  if(st.postponed){ delete state[id]; store.save(state); refresh(); toast('Séance réactivée'); }
+  else{ state[id]={postponed:true}; store.save(state); refresh(); toast('Séance décalée — reprends-la quand tu veux'); }
+}
+
+/* ---- sorties libres (extras) ---- */
+function extras(){ return state.__extras||[]; }
+function weekOfDate(iso){
+  if(!iso) return null;
+  const start=new Date(2026,6,13); const d=new Date(iso+'T12:00:00');
+  const diff=Math.floor((d-start)/864e5);
+  return Math.min(12,Math.max(1,Math.floor(diff/7)+1));
+}
+function toggleExtraForm(){ document.getElementById('extraForm').classList.toggle('on'); }
+function addExtra(){
+  const date=document.getElementById('ex_date').value||todayISO();
+  const type=document.getElementById('ex_type').value;
+  const km=parseFloat(document.getElementById('ex_km').value);
+  const dp=parseInt(document.getElementById('ex_dp').value,10);
+  const rpe=+document.getElementById('ex_rpe').value;
+  const note=document.getElementById('ex_note').value.trim();
+  const rec={id:'x'+Date.now(),date,type,rpe,note};
+  if(!isNaN(km)&&km>0) rec.km=Math.round(km*10)/10;
+  if(!isNaN(dp)&&dp>0) rec.dp=dp;
+  if(!state.__extras) state.__extras=[];
+  state.__extras.push(rec);
+  store.save(state);
+  document.getElementById('ex_km').value='';document.getElementById('ex_dp').value='';document.getElementById('ex_note').value='';
+  document.getElementById('extraForm').classList.remove('on');
+  refresh(); toast('Sortie libre ajoutée le '+fmtDate(date));
+}
+function delExtra(id){
+  state.__extras=(state.__extras||[]).filter(x=>x.id!==id);
+  store.save(state); refresh(); toast('Sortie supprimée');
+}
+function drawExtras(){
+  const root=document.getElementById('extras'); const xs=extras().slice().sort((a,b)=>a.date<b.date?1:-1);
+  root.innerHTML=`
+    <div class="extras-head">
+      <div class="sec-label">Sorties libres — hors plan (${xs.length})</div>
+      <button class="addbtn" onclick="toggleExtraForm()">+ ajouter une sortie</button>
+    </div>
+    <div class="extra-form" id="extraForm">
+      <div class="grid2">
+        <div class="fld"><small>Date</small><input type="date" id="ex_date" value="${todayISO()}" max="${todayISO()}"></div>
+        <div class="fld"><small>Type</small><select id="ex_type">
+          <option value="EF">Footing / EF</option><option value="TRAJ">Trajet</option>
+          <option value="SL">Sortie longue</option><option value="DP">Fractionné / D+</option>
+          <option value="RENFO">Renfo</option><option value="Autre">Autre</option>
+        </select></div>
+      </div>
+      <div class="grid2">
+        <div class="fld"><small>km</small><input type="number" inputmode="decimal" step="0.1" min="0" id="ex_km" placeholder="ex. 12,4"></div>
+        <div class="fld"><small>D+</small><input type="number" inputmode="numeric" step="10" min="0" id="ex_dp" placeholder="ex. 450"></div>
+      </div>
+      <div class="fld"><small>Effort perçu — RPE <b id="ex_rpev" style="color:var(--gold)">5</b> · 1 facile → 10 max</small>
+        <input type="range" min="1" max="10" value="5" id="ex_rpe" oninput="document.getElementById('ex_rpev').textContent=this.value" style="width:100%"></div>
+      <input type="text" id="ex_note" maxlength="80" placeholder="Note (optionnel)" style="width:100%;background:var(--night);border:1px solid var(--edge);border-radius:7px;color:var(--snow);font-size:13px;padding:7px 9px;margin:8px 0">
+      <div class="row" style="display:flex;gap:8px">
+        <button class="btn p" onclick="addExtra()">Ajouter</button>
+        <button class="btn g" onclick="toggleExtraForm()">Annuler</button>
+      </div>
+    </div>
+    ${xs.map(x=>`
+      <div class="extra-item">
+        <span class="xdate">${fmtDate(x.date)}</span>
+        <div class="xmain">
+          <span class="badge b-${['EF','DP','TRAJ','SL','RENFO'].includes(x.type)?x.type:'FLEX'}">${badgeLbl(x.type)||x.type}</span>
+          <span class="xmeta">${x.km?x.km+' km':''}${x.km&&x.dp?' · ':''}${x.dp?x.dp+' D+':''}${(x.km||x.dp)?' · ':''}RPE ${x.rpe}/10${x.note?' · '+esc(x.note):''}</span>
+        </div>
+        <button class="xdel" onclick="delExtra('${x.id}')" aria-label="Supprimer">×</button>
+      </div>`).join('')}`;
+}
+
+/* ---- garde-fou fatigue ---- */
+function drawGuard(){
+  const root=document.getElementById('guard');
+  const done=S.filter(s=>state[s.id]?.done).map(s=>({type:s.type,rpe:state[s.id].feel||0,d:state[s.id].dateDone||s.d}))
+    .concat(extras().map(x=>({type:x.type,rpe:x.rpe||0,d:x.date})))
+    .filter(o=>o.d).sort((a,b)=>a.d<b.d?-1:1);
+  let msg=null;
+  const last3=done.slice(-3);
+  if(last3.length===3 && last3.every(o=>o.rpe>=8)){
+    msg={t:'Charge élevée — pense à souffler',
+      p:'Tes 3 dernières séances sont toutes à RPE 8+. Insère une vraie journée facile ou un repos : sur ce plan, la fatigue accumulée coûte plus cher qu\'une séance manquée. L\'objectif reste de finir frais.'};
+  }
+  if(!msg){
+    const easy=done.slice(-2).find(o=>(o.type==='EF'||o.type==='TRAJ')&&o.rpe>=8);
+    if(easy) msg={t:'Une séance facile t\'a coûté cher',
+      p:'Un footing ou un trajet à RPE 8+ est souvent un signal de fatigue (sommeil, nuit avec le petit, cumul). Si la prochaine séance facile reste dure, allège la semaine sans hésiter.'};
+  }
+  root.innerHTML = msg?`<div class="guard"><span class="ic">🫁</span><div><b>${msg.t}</b><p>${msg.p}</p></div></div>`:'';
+}
+
+/* ============== EXPORT / IMPORT ============== */
+$('#btnExport').onclick=()=>{
+  const blob=new Blob([JSON.stringify({v:1,exported:new Date().toISOString(),state},null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='franco-suisse-2026-sauvegarde.json';
+  a.click(); URL.revokeObjectURL(a.href);
+  toast('Sauvegarde exportée');
+};
+$('#btnImport').onclick=()=>$('#fileImport').click();
+$('#fileImport').onchange=e=>{
+  const f=e.target.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const d=JSON.parse(r.result);
+      state=d.state||d; store.save(state); refresh(); toast('Sauvegarde importée ✓');
+    }catch(err){ toast('Fichier invalide'); }
+  };
+  r.readAsText(f);
+};
+
+/* ============== TOAST & REFRESH ============== */
+let toastT;
+function toast(msg){
+  const el=$('#toast'); el.textContent=msg; el.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('on'),2200);
+}
+function refresh(){ drawStats(); drawWeeks(); drawExtras(); drawGuard(); drawRidge(); drawChart(); drawToday(); }
+refresh();
+</script>
+</body>
+</html>
