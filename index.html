@@ -235,6 +235,8 @@ h1 .thin{color:var(--mist);font-weight:400}
 
 @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -316,30 +318,51 @@ h1 .thin{color:var(--mist);font-weight:400}
 <details class="foldable">
   <summary>Bibliothèque de parcours — depuis le 5 rue du Guet</summary>
   <div class="fold-body">
-    <p><b>Fiabilité :</b> les boucles n°1 et n°2 sont des tracés documentés (balisage officiel du Parc de la Grande Corniche). Les autres sont des repères réels avec des km/D+ estimés — vérifie à la montre la première fois et corrige-les ici. La Turbie n'a quasiment pas de plat : ton « footing facile » se fera en vallonné doux, et c'est parfait pour la Franco Suisse.</p>
+    <p><b>Fiabilité :</b> les boucles n°1 et n°2 sont des tracés documentés (balisage officiel). Les autres sont des repères réels aux km/D+ estimés — vérifie à la montre et corrige ici. La Turbie n'a quasiment pas de plat : ton « footing facile » se fera en vallonné doux, parfait pour la Franco Suisse.</p>
+    <div id="parcoursMap" style="height:280px;border-radius:12px;overflow:hidden;margin:10px 0;border:1px solid var(--edge);background:var(--pine2)"></div>
+    <p style="font-size:11px;color:var(--stone);margin-top:-4px">Repères géolocalisés (pas le tracé exact). Tape un point pour son nom. Les liens ci-dessous ouvrent le tracé GPS complet.</p>
 
     <h4>1 · Boucle Tête de Chien — 10 km / 240 D+ (documentée)</h4>
-    <ul><li>Route de la Tête de Chien, balises 600 → 604 → 605, portion de GR51B, retour par le <b>chemin de la Crémaillère</b>. Roulante pour le coin, panorama Monaco. Ton gabarit EF / SL courte de référence.</li></ul>
+    <ul>
+      <li>Route de la Tête de Chien, balises 600 → 604 → 605, portion de GR51B, retour par le <b>chemin de la Crémaillère</b>. Roulante pour le coin, panorama Monaco. Ton gabarit EF / SL courte de référence.</li>
+      <li>🔗 Tracé : <a href="https://www.menton-riviera-merveilles.co.uk/offers/hiking-around-the-tete-de-chien-la-turbie-en-3123199/" target="_blank" rel="noopener">Tour de la Tête de Chien (départ Mairie)</a> · <a href="https://www.visugpx.com/les-plus-belles-randonnees/alpes-maritimes/la-turbie/?activite=rp" target="_blank" rel="noopener">toutes les traces GPX La Turbie</a></li>
+    </ul>
 
     <h4>2 · Grande boucle du chemin romain — 14 km / 670 D+ (documentée)</h4>
-    <ul><li>Même départ, balises 600 → 601 → 602a puis le <b>chemin romain</b>, Chapelle St-Roch, Le Justicier, retour par la Crémaillère. Ton gabarit SL 2 h, entièrement au départ de la maison.</li></ul>
+    <ul>
+      <li>Même départ, balises 600 → 601 → 602a puis le <b>chemin romain</b>, Chapelle St-Roch, Le Justicier, retour par la Crémaillère. Ton gabarit SL 2 h, entièrement au départ de la maison.</li>
+      <li>🔗 Tracé GPX : <a href="https://www.visugpx.com/r9QbyMwJS4" target="_blank" rel="noopener">RPM Tête de Chien / chemin romain (VisuGPX)</a></li>
+    </ul>
 
     <h4>3 · Fort de la Revère — SL vallonnée</h4>
-    <ul><li>Sur la Grande Corniche entre Èze et La Turbie, accessible plein ouest par le GR51. Aller-retour ou boucle selon la forme. Vérifie la distance ta première fois : c'est plus loin que la Tête de Chien.</li></ul>
+    <ul>
+      <li>Sur la Grande Corniche entre Èze et La Turbie, accessible plein ouest par le GR51. Aller-retour ou boucle. Plus loin que la Tête de Chien — vérifie la distance ta première fois.</li>
+      <li>🔗 Tracé : <a href="https://www.visorando.com/randonnee-les-balcons-de-la-turbie/" target="_blank" rel="noopener">Les balcons de La Turbie — GR51 (Visorando)</a></li>
+    </ul>
 
     <h4>4 · Mont Agel / Cime de la Forna — la grosse montée</h4>
-    <ul><li>Au-dessus de La Turbie côté Peille/Monaco. <b>Le sommet du Mont Agel est militaire et interdit</b> — l'objectif est la Cime de la Forna et les pistes d'accès. LA montée de référence de ta prépa : chronomètre-la en S5 puis en S10, le progrès sautera aux yeux. Support idéal des fractionnés en côte.</li></ul>
+    <ul>
+      <li>Au-dessus de La Turbie côté Peille/Monaco. <b>Sommet Agel militaire, interdit</b> — objectif la Cime de la Forna et ses pistes. LA montée de référence pour ton test VAM (S5 puis S10). Support des fractionnés en côte.</li>
+      <li>🔗 Traces secteur Agel/Forna : <a href="https://www.visugpx.com/les-plus-belles-randonnees/alpes-maritimes/la-turbie/?activite=rp" target="_blank" rel="noopener">collection VisuGPX La Turbie</a></li>
+    </ul>
 
     <h4>5 · Parc de la Grande Corniche / Plateau de la Justice — SL à l'ouest</h4>
-    <ul><li>Plein ouest vers Èze par le GR51 (avenue des Diables Bleus, parcours santé, tables de pique-nique). <b>C'est loin de chez toi</b> — une SL à part entière, pas un footing rapide. Beaux balcons sur mer, enchaînement possible avec le Mont Bastide et le sentier Nietzsche pour du D+ garanti.</li></ul>
+    <ul>
+      <li>Plein ouest vers Èze par le GR51 (parcours santé, tables). <b>Loin de chez toi</b> — une SL à part entière. Enchaînement possible avec Mont Bastide et le sentier Nietzsche pour du D+ garanti.</li>
+      <li>🔗 Infos parc : <a href="https://www.departement06.fr/parc-de-la-grande-corniche" target="_blank" rel="noopener">Parc départemental Grande Corniche</a></li>
+    </ul>
 
     <h4>6 · Week-end choc — retour aux sources mentonnaises</h4>
-    <ul><li>Pour la grosse sortie de S8, vise le col de la Madone / Sainte-Agnès côté est : tes anciens terrains, profils très Franco Suisse. Reconstitue la distance avec un traceur GPX avant de partir.</li></ul>
+    <ul>
+      <li>Pour la grosse sortie de S8, vise le col de la Madone / Sainte-Agnès côté est : tes anciens terrains, profils très Franco Suisse. Reconstitue la distance avec un traceur GPX avant de partir.</li>
+      <li>🔗 Point de repère : <a href="https://www.visugpx.com/les-plus-belles-randonnees/alpes-maritimes/la-turbie/?activite=rp" target="_blank" rel="noopener">traces secteur Madone / Gorbio</a></li>
+    </ul>
 
     <h4>Trajets CHPG La Turbie ↔ Monaco</h4>
     <ul>
-      <li><b>Descente (matin)</b> : de La Turbie vers le CHPG (Fontvieille), ~430 m de négatif. Trouve ta ligne les premières fois (sentiers, escaliers de Beausoleil, ou route selon le trafic) et fige celle qui te plaît.</li>
-      <li><b>Montée (soir)</b> : le même trajet à l'envers, ~430 D+. Ta séance de montée déguisée, 2-3 fois par semaine — exactement le point faible que tu veux travailler.</li>
+      <li><b>Descente (matin)</b> vers le CHPG (Fontvieille), ~430 m négatif : par la <b>Voie Romaine</b> restaurée puis l'escalier des Révoires, ou la route selon le trafic. Fige la ligne qui te plaît.</li>
+      <li><b>Montée (soir)</b>, ~430 D+ : le même à l'envers. Ta séance de montée déguisée, 2-3×/semaine.</li>
+      <li>🔗 Tracé Monaco ↔ La Turbie (Voie Romaine / Révoires) : <a href="https://www.visugpx.com/GTomclzohb" target="_blank" rel="noopener">boucle Tête de Chien depuis Monaco (VisuGPX)</a></li>
     </ul>
   </div>
 </details>
@@ -935,6 +958,42 @@ function toast(msg){
 }
 function refresh(){ drawStats(); drawWeeks(); drawExtras(); drawGuard(); drawRidge(); drawChart(); drawToday(); }
 refresh();
+
+/* ============== CARTE PARCOURS (Leaflet) ============== */
+let _mapInit=false;
+function initParcoursMap(){
+  if(_mapInit || typeof L==='undefined') return;
+  const el=document.getElementById('parcoursMap');
+  if(!el || el.offsetParent===null) return; // pas encore visible
+  _mapInit=true;
+  const pts=[
+    {n:"Départ — village La Turbie (≈ 5 rue du Guet)",la:43.7448,lo:7.4018,c:"#FF7A3D"},
+    {n:"1 · Tête de Chien (10 km / 240 D+)",la:43.7307,lo:7.4021,c:"#9CC069"},
+    {n:"2 · Chemin romain / Justicier (14 km / 670 D+)",la:43.7360,lo:7.4080,c:"#9CC069"},
+    {n:"3 · Fort de la Revère",la:43.7390,lo:7.3666,c:"#F2C14E"},
+    {n:"4 · Cime de la Forna / Mont Agel (test VAM)",la:43.7420,lo:7.3878,c:"#F2C14E"},
+    {n:"5 · Parc Grande Corniche / Plateau Justice",la:43.7386,lo:7.3652,c:"#7BAFC4"},
+    {n:"6 · Col de la Madone (week-end choc)",la:43.8032,lo:7.4232,c:"#7BAFC4"},
+    {n:"CHPG Monaco (Fontvieille) — trajets",la:43.7263,lo:7.4149,c:"#8FA69B"}
+  ];
+  const map=L.map('parcoursMap',{scrollWheelZoom:false}).setView([43.745,7.395],13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    maxZoom:18, attribution:'© OpenStreetMap'}).addTo(map);
+  const grp=[];
+  pts.forEach(p=>{
+    const m=L.circleMarker([p.la,p.lo],{radius:8,color:'#0E1613',weight:2,fillColor:p.c,fillOpacity:1})
+      .addTo(map).bindPopup('<b style="font-family:sans-serif">'+p.n+'</b>');
+    grp.push([p.la,p.lo]);
+  });
+  map.fitBounds(grp,{padding:[30,30]});
+  setTimeout(()=>map.invalidateSize(),200);
+}
+// (ré)initialiser quand la section bibliothèque s'ouvre
+document.addEventListener('click',e=>{
+  const s=e.target.closest('summary');
+  if(s && s.textContent.includes('Bibliothèque')) setTimeout(initParcoursMap,120);
+});
+
 </script>
 </body>
 </html>
