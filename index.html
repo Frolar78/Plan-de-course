@@ -519,8 +519,12 @@ const KEY='fs2026_state';
 let mem={};
 const store={
   load(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return mem; } },
-  save(st){ try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){ mem=st; } }
+  save(st){ try{ localStorage.setItem(KEY,JSON.stringify(st)); return true; }catch(e){ mem=st; return false; } }
 };
+function storagePersists(){
+  try{ const k='__fs_test__'; localStorage.setItem(k,'1'); const v=localStorage.getItem(k); localStorage.removeItem(k); return v==='1'; }
+  catch(e){ return false; }
+}
 let state=store.load();
 
 const $=s=>document.querySelector(s);
@@ -742,11 +746,17 @@ function esc(t){return String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 /* ============== ACTIONS ============== */
 function toggle(id){
   const st=state[id]||{};
-  if(st.done){ // uncheck
+  if(st.done){ // décocher
     delete state[id]; store.save(state); refresh(); toast('Séance décochée');
   }else{
-    document.getElementById('row_'+id).classList.add('editing','checked');
-    document.getElementById('row_'+id).querySelector('.chk').textContent='✓';
+    // ENREGISTREMENT IMMÉDIAT dès le cochage (le détail reste optionnel ensuite)
+    const s=S.find(x=>x.id===id)||{};
+    state[id]={done:true,dateDone:s.d||todayISO(),feel:null,note:'',ts:Date.now()};
+    const ok=store.save(state);
+    refresh();
+    const row=document.getElementById('row_'+id);
+    if(row) row.classList.add('editing'); // ouvre la fiche pour compléter si envie
+    toast(ok?'✓ Séance enregistrée':'⚠ Enregistrement bloqué — voir bandeau');
   }
 }
 function edit(id){ document.getElementById('row_'+id).classList.add('editing'); }
@@ -911,6 +921,11 @@ function drawExtras(){
 /* ---- garde-fou fatigue ---- */
 function drawGuard(){
   const root=document.getElementById('guard');
+  // priorité absolue : alerte si l'enregistrement local ne persiste pas
+  if(!storagePersists()){
+    root.innerHTML='<div class="guard" style="border-color:#e0574a"><span class="ic">⚠️</span><div><b style="color:#e0574a">Tes validations ne seront pas conservées</b><p>Ce navigateur bloque l\'enregistrement local (souvent : navigation privée, ou app ouverte depuis l\'icône écran d\'accueil sur certains iPhone). Ouvre plutôt le site dans <b>Safari ou Chrome en onglet normal</b>, et pense à <b>Exporter la sauvegarde</b> régulièrement. Vérifie aussi que tu es bien sur l\'adresse du site en ligne (frolar78.github.io/Plan-de-course), pas sur un aperçu.</p></div></div>';
+    return;
+  }
   const done=S.filter(s=>state[s.id]?.done).map(s=>({type:s.type,rpe:state[s.id].feel||0,d:state[s.id].dateDone||s.d}))
     .concat(extras().map(x=>({type:x.type,rpe:x.rpe||0,d:x.date})))
     .filter(o=>o.d).sort((a,b)=>a.d<b.d?-1:1);
