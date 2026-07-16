@@ -232,6 +232,7 @@ h1 .thin{color:var(--mist);font-weight:400}
 .sess.postponed{opacity:.5}
 .sess.postponed .s-title{text-decoration:line-through}
 .tag-report{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;background:var(--slate);color:var(--night);padding:2px 6px;border-radius:5px}
+.etag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;background:var(--pine2);color:var(--mist);border:1px solid var(--edge);padding:2px 6px;border-radius:5px;flex-shrink:0}
 .mini-actions{display:flex;gap:8px;margin-top:6px}
 .mini-actions button{background:none;border:1px solid var(--edge);color:var(--mist);border-radius:7px;font-size:12.5px;padding:7px 12px;cursor:pointer;font-family:'Archivo',sans-serif;min-height:38px}
 
@@ -728,12 +729,13 @@ function sessHTML(s){
         <span class="s-day">${s.day}</span>
         <span class="badge b-${s.type}">${badgeLbl(s.type)}</span>
         <span class="s-title">${s.t}</span>
+        ${!s.info?`<span class="etag">${ELABEL[s.id]||''}</span>`:''}
         ${st.postponed?'<span class="tag-report">reportée</span>':''}
       </div>
       ${meta?`<div class="s-meta">${meta}</div>`:''}
       ${s.x?`<div class="s-desc">${s.x}</div>`:''}
       ${st.done?`<span class="feel-chip" onclick="edit('${s.id}')">${st.dateDone?fmtDate(st.dateDone)+' · ':''}RPE ${st.feel||'–'}/10${(st.km||st.dp)?' · '+(st.km?st.km+' km':'')+(st.km&&st.dp?'/':'')+(st.dp?st.dp+' D+':''):''}${st.note?' · '+esc(st.note):''} ✎</span>`:''}
-      ${canReport?`<div class="mini-actions"><button onclick="postpone('${s.id}')">${st.postponed?'↩ reprendre':'⤳ décaler'}</button></div>`:''}
+      ${!s.info?`<div class="mini-actions"><button onclick="copyStrava('${s.id}')">📋 Titre Strava</button>${canReport?`<button onclick="postpone('${s.id}')">${st.postponed?'↩ reprendre':'⤳ décaler'}</button>`:''}</div>`:''}
       <div class="feel-box" id="fb_${s.id}">
         <label>Effort perçu — RPE <b id="fv_${s.id}">${st.feel||5}</b></label>
         <div style="font-size:10px;color:var(--stone);font-family:'JetBrains Mono',monospace;margin:-4px 0 2px">1 = très facile · 10 = maximal</div>
@@ -985,6 +987,49 @@ function toast(msg){
   const el=$('#toast'); el.textContent=msg; el.classList.add('on');
   clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('on'),2200);
 }
+/* ============== TITRES STRAVA ============== */
+const SN={
+ s1a:"Reprise douce",s1b:"Retour montée",s1r:"Renfo",s1c:"Tête de Chien",
+ s2a:"Footing",s2b:"Retour montée",s2c:"Aller descente",s2r:"Renfo",s2d:"Sortie longue",
+ s3a:"Trajet A/R",s3b:"Sortie éclair",s3c:"Sortie éclair",
+ s4a:"Footing vallonné",s4b:"Fractionné 8×1'",s4r1:"Renfo",s4r2:"Renfo",s4c:"Sortie longue",
+ s5a:"Footing + lignes droites",s5b:"Fractionné 6×3'",s5r1:"Renfo",s5r2:"Renfo",s5c:"Mont Agel (test VAM)",
+ s6a:"Tempo côte 2×8'",s6b:"Montée longue",s6c:"Boucle Agel-Madone",s6d:"Récup active",s6r1:"Renfo",s6r2:"Renfo",
+ s7a:"Retour montée",s7b:"Aller descente",s7r:"Renfo",s7c:"Sortie longue",
+ s8a:"Footing léger",s8b:"Retour montée",s8c:"Choc 1 - répét générale",s8d:"Choc 2 - jambes fatiguées",
+ s9a:"Décrassage",s9r:"Renfo",s9b:"Retour montée",s9c:"Sortie moyenne",
+ s10a:"Trajet A/R",s10b:"Fractionné 5×4'",s10r1:"Renfo",s10r2:"Renfo",s10c:"Grande sortie + Agel",
+ s11a:"Retour montée",s11r:"Renfo",s11b:"Footing + relances",s11c:"Trail plaisir",
+ s12a:"Footing + lignes droites",s12b:"Déblocage",s12c:"FRANCO SUISSE 🏁"
+};
+const ELABEL={};
+(function(){
+  for(let w=1;w<=12;w++){
+    const items=S.filter(s=>s.w===w && !s.info);
+    const dated=items.filter(s=>s.d).slice().sort((a,b)=>a.d<b.d?-1:(a.d>b.d?1:0));
+    const undated=items.filter(s=>!s.d);
+    dated.concat(undated).forEach((s,i)=>{ ELABEL[s.id]='S'+w+'E'+(i+1); });
+  }
+})();
+function stravaTitle(id){
+  const s=S.find(x=>x.id===id)||{};
+  return 'Programme Claude '+(ELABEL[id]||'')+' · '+(SN[id]||s.t||'');
+}
+function copyStrava(id){
+  const txt=stravaTitle(id);
+  const done=()=>toast('Copié : '+txt);
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));
+  } else fallbackCopy(txt,done);
+}
+function fallbackCopy(txt,cb){
+  const ta=document.createElement('textarea');
+  ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try{ document.execCommand('copy'); cb&&cb(); }catch(e){ toast('Copie impossible — titre : '+txt); }
+  document.body.removeChild(ta);
+}
+
 function refresh(){ drawStats(); drawWeeks(); drawExtras(); drawGuard(); drawRidge(); drawChart(); drawToday(); }
 refresh();
 
