@@ -374,8 +374,8 @@ h1 .thin{color:var(--mist);font-weight:400}
 
     <h4>Trajets CHPG La Turbie ↔ Monaco</h4>
     <ul>
-      <li><b>Descente (matin)</b> vers le CHPG (Fontvieille), ~430 m négatif : par la <b>Voie Romaine</b> restaurée puis l'escalier des Révoires, ou la route selon le trafic. Fige la ligne qui te plaît.</li>
-      <li><b>Montée (soir)</b>, ~430 D+ : le même à l'envers. Ta séance de montée déguisée, 2-3×/semaine.</li>
+      <li><b>Descente (matin)</b> vers le CHPG (Fontvieille), <b>3,7 km / ~25' / ~-430 m</b> (mesuré) : par la <b>Voie Romaine</b> restaurée puis l'escalier des Révoires, ou la route selon le trafic. Fige la ligne qui te plaît.</li>
+      <li><b>Montée (soir)</b>, <b>4,5 km / ~45' / +432 D+</b> (mesuré le 16/07) : le même à l'envers. Ta séance de montée déguisée, 2-3×/semaine — ~575 m/h à froid, du bon niveau.</li>
       <li>🔗 Tracé Monaco ↔ La Turbie (Voie Romaine / Révoires) : <a href="https://www.visugpx.com/GTomclzohb" target="_blank" rel="noopener">boucle Tête de Chien depuis Monaco (VisuGPX)</a></li>
     </ul>
   </div>
@@ -456,19 +456,19 @@ const WEEKS = [
 const S = [
  /* S1 */
  {id:"s1a",w:1,d:"2026-07-14",day:"Mar 14",type:"EF",t:"Reprise en douceur",dur:40,km:7,dp:100,x:"Roulant, allure conversation stricte. Après 8 semaines off, ta FC sera haute : vise FC < 160 et ~6:15-6:30/km, sans regarder le chrono. Si ça pique, marche."},
- {id:"s1b",w:1,d:"2026-07-16",day:"Jeu 16",type:"TRAJ",t:"Retour CHPG → La Turbie ↑",dur:50,km:6.5,dp:430,x:"Rando-course : course sur le doux, marche tonique mains sur les cuisses dans le raide. C'est LE geste Franco Suisse."},
+ {id:"s1b",w:1,d:"2026-07-16",day:"Jeu 16",type:"TRAJ",t:"Retour CHPG → La Turbie ↑",dur:45,km:4.5,dp:432,x:"Rando-course : course sur le doux, marche tonique mains sur les cuisses dans le raide. Chiffres calés sur ton vrai trajet (4,5 km / 432 D+ / 45'). C'est LE geste Franco Suisse."},
  {id:"s1c",w:1,d:"2026-07-18",day:"Sam 18",type:"SL",t:"Découverte Tête de Chien",dur:75,km:10,dp:240,x:"1 h 15 mixte course/marche — boucle documentée n°1 (Tête de Chien, 10 km / 240 D+), l'occasion de découvrir ton nouveau terrain de jeu."},
  {id:"s1r",w:1,d:"2026-07-17",day:"Ven 17",type:"RENFO",t:"Circuit renfo × 2 tours",dur:15,km:0,dp:0,x:"Voir « Le circuit renfo » en bas de page. Version courte pour reprendre."},
  /* S2 */
  {id:"s2a",w:2,d:"2026-07-20",day:"Lun 20",type:"EF",t:"Footing veille de garde",dur:40,km:7,dp:50,x:"Souple, terrain plat ou léger faux-plat. On arrive frais à la garde."},
  {id:"s2g",w:2,d:"2026-07-21",day:"Mar 21",type:"GARDE",t:"Garde 24 h",info:1,x:"Dormir dès que possible."},
  {id:"s2h",w:2,d:"2026-07-22",day:"Mer 22",type:"REPOS",t:"Repos post-garde",info:1,x:"Sieste, marche tranquille au mieux."},
- {id:"s2b",w:2,d:"2026-07-23",day:"Jeu 23",type:"TRAJ",t:"Retour montée ↑",dur:50,km:6.5,dp:430,x:"Z2 max. La régularité prime sur le chrono de la montée."},
- {id:"s2c",w:2,d:"2026-07-24",day:"Ven 24",type:"TRAJ",t:"Aller descente ↓",dur:40,km:6.5,dp:0,x:"La Turbie → CHPG, douche à l'arrivée. Descente relâchée : petits pas, fréquence haute, regard loin. -430 m d'apprentissage."},
+ {id:"s2b",w:2,d:"2026-07-23",day:"Jeu 23",type:"TRAJ",t:"Retour montée ↑",dur:45,km:4.5,dp:432,x:"Z2 max. La régularité prime sur le chrono de la montée."},
+ {id:"s2c",w:2,d:"2026-07-24",day:"Ven 24",type:"TRAJ",t:"Aller descente ↓",dur:25,km:3.7,dp:40,x:"La Turbie → CHPG, douche à l'arrivée. Descente relâchée : petits pas, fréquence haute, regard loin. ~-430 m d'apprentissage (3,7 km / 25' chez toi)."},
  {id:"s2d",w:2,d:"2026-07-26",day:"Dim 26",type:"SL",t:"Sortie longue vallonnée",dur:90,km:11,dp:550,x:"1 h 30 en aisance, marche assumée dans les montées."},
  {id:"s2r",w:2,d:"2026-07-25",day:"Sam 25",type:"RENFO",t:"Circuit renfo × 2 tours",dur:15,km:0,dp:0,x:"Accent sur les squats excentriques."},
  /* S3 */
- {id:"s3a",w:3,d:"2026-07-27",day:"Lun 27",type:"TRAJ",t:"Aller-retour trajet ↓↑",dur:90,km:13,dp:430,x:"Descente le matin (40'), remontée le soir (50'). Dernier gros jour avant le congé."},
+ {id:"s3a",w:3,d:"2026-07-27",day:"Lun 27",type:"TRAJ",t:"Aller-retour trajet ↓↑",dur:70,km:8.2,dp:470,x:"Descente le matin (~25'), remontée le soir (~45'). Dernier gros jour avant le congé."},
  {id:"s3g",w:3,d:"2026-07-29",day:"Mer 29",type:"FLEX",t:"👶 Terme — début congé paternité",info:1,x:"Félicitations. Le plan attendra."},
  {id:"s3b",w:3,d:"",day:"Flex",type:"FLEX",t:"Sortie éclair n°1",dur:40,km:7,dp:100,x:"40' depuis la maison, n'importe quel jour, n'importe quelle heure. Décompression."},
  {id:"s3c",w:3,d:"",day:"Flex",type:"FLEX",t:"Sortie éclair n°2",dur:45,km:7.5,dp:150,x:"45' vallonné au feeling. Optionnelle — zéro culpabilité si elle saute."},
@@ -492,30 +492,30 @@ const S = [
  {id:"s6r1",w:6,d:"2026-08-17",day:"Lun 17",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:""},
  {id:"s6r2",w:6,d:"2026-08-21",day:"Ven 21",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:""},
  /* S7 */
- {id:"s7a",w:7,d:"2026-08-25",day:"Mar 25",type:"TRAJ",t:"Retour montée ↑ (reprise CHPG)",dur:50,km:6.5,dp:430,x:"Retour au travail = retour des trajets. Z2, sac léger."},
- {id:"s7b",w:7,d:"2026-08-27",day:"Jeu 27",type:"TRAJ",t:"Aller descente ↓ (+ retour si la forme est là)",dur:40,km:6.5,dp:60,x:"Descente le matin. Le retour du soir en option : écoute les jambes, le week-end choc arrive."},
+ {id:"s7a",w:7,d:"2026-08-25",day:"Mar 25",type:"TRAJ",t:"Retour montée ↑ (reprise CHPG)",dur:45,km:4.5,dp:432,x:"Retour au travail = retour des trajets. Z2, sac léger."},
+ {id:"s7b",w:7,d:"2026-08-27",day:"Jeu 27",type:"TRAJ",t:"Aller descente ↓ (+ retour si la forme est là)",dur:25,km:3.7,dp:40,x:"Descente le matin. Le retour du soir en option : écoute les jambes, le week-end choc arrive."},
  {id:"s7c",w:7,d:"2026-08-30",day:"Dim 30",type:"SL",t:"Sortie longue modérée",dur:120,km:14,dp:800,x:"2 h faciles. On garde du jus : la vraie échéance, c'est samedi prochain."},
  {id:"s7r",w:7,d:"2026-08-28",day:"Ven 28",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:"Dernier renfo avant le choc."},
  /* S8 */
  {id:"s8a",w:8,d:"2026-08-31",day:"Lun 31",type:"EF",t:"Footing léger veille de garde",dur:40,km:7,dp:50,x:"Court et souple."},
  {id:"s8g",w:8,d:"2026-09-01",day:"Mar 1",type:"GARDE",t:"Garde 24 h",info:1,x:"Dors quand tu peux : samedi se prépare aussi là."},
  {id:"s8h",w:8,d:"2026-09-02",day:"Mer 2",type:"REPOS",t:"Repos post-garde",info:1,x:"Sieste obligatoire."},
- {id:"s8b",w:8,d:"2026-09-03",day:"Jeu 3",type:"TRAJ",t:"Retour montée ↑ très facile",dur:45,km:6.5,dp:430,x:"Z1-Z2 strict, jambes légères pour samedi."},
+ {id:"s8b",w:8,d:"2026-09-03",day:"Jeu 3",type:"TRAJ",t:"Retour montée ↑ très facile",dur:45,km:4.5,dp:432,x:"Z1-Z2 strict, jambes légères pour samedi."},
  {id:"s8c",w:8,d:"2026-09-05",day:"Sam 5",type:"SL",t:"CHOC 1 — répétition générale",dur:240,km:26,dp:1600,x:"4 h, sac + bâtons + tenue + nutrition 100 % course — n°6 : retrouve tes terres mentonnaises via la Madone et Sainte-Agnès. Allure cible barrières : marche toutes les montées, mange toutes les 30'. C'est un test, pas une course."},
  {id:"s8d",w:8,d:"2026-09-06",day:"Dim 6",type:"SL",t:"CHOC 2 — sur jambes fatiguées",dur:120,km:14,dp:700,x:"2 h le lendemain, tout en aisance. Apprendre à avancer fatigué : exactement la sensation du km 70."},
  /* S9 */
  {id:"s9a",w:9,d:"2026-09-09",day:"Mer 9",type:"EF",t:"Footing de décrassage",dur:40,km:7,dp:80,x:"Très souple. Les courbatures du choc sont normales jusqu'à mardi."},
- {id:"s9b",w:9,d:"2026-09-11",day:"Ven 11",type:"TRAJ",t:"Retour montée ↑",dur:50,km:6.5,dp:430,x:"Z2 tranquille."},
+ {id:"s9b",w:9,d:"2026-09-11",day:"Ven 11",type:"TRAJ",t:"Retour montée ↑",dur:45,km:4.5,dp:432,x:"Z2 tranquille."},
  {id:"s9c",w:9,d:"2026-09-13",day:"Dim 13",type:"SL",t:"Sortie moyenne",dur:105,km:13,dp:500,x:"1 h 45 vallonné, au plaisir."},
  {id:"s9r",w:9,d:"2026-09-10",day:"Jeu 10",type:"RENFO",t:"Circuit renfo × 2 tours",dur:15,km:0,dp:0,x:"Version légère."},
  /* S10 */
- {id:"s10a",w:10,d:"2026-09-15",day:"Mar 15",type:"TRAJ",t:"Aller-retour trajet ↓↑",dur:90,km:13,dp:450,x:"Descente le matin (40'), remontée le soir (50'). Journée à 90' sans y penser."},
+ {id:"s10a",w:10,d:"2026-09-15",day:"Mar 15",type:"TRAJ",t:"Aller-retour trajet ↓↑",dur:70,km:8.2,dp:470,x:"Descente le matin (~25'), remontée le soir (~45'). Journée à 70' sans y penser."},
  {id:"s10b",w:10,d:"2026-09-17",day:"Jeu 17",type:"DP",t:"Fractionné côte 5 × 4'",dur:60,km:7,dp:450,x:"5 × 4' en montée Z3, récup descente. Dernière séance dure de la préparation."},
  {id:"s10c",w:10,d:"2026-09-19",day:"Sam 19",type:"SL",t:"Dernière grande sortie + re-test Agel",dur:180,km:19,dp:1300,x:"3 h matériel course complet, dernier réglage nutrition + chaussures définitives. Inclus la montée du Mont Agel / Forna et chronomètre-la : compare ta VAM à celle de S5, c'est la preuve chiffrée de ton gain en montée. Si tu te sens frais, tu peux pousser jusqu'à ~1 500-1 700 D+ — tu as déjà encaissé bien plus (Ventoux, week-end de mai). Après elle : plus rien de long, promis."},
  {id:"s10r1",w:10,d:"2026-09-14",day:"Lun 14",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:""},
  {id:"s10r2",w:10,d:"2026-09-18",day:"Ven 18",type:"RENFO",t:"Circuit renfo × 3 tours",dur:20,km:0,dp:0,x:""},
  /* S11 */
- {id:"s11a",w:11,d:"2026-09-22",day:"Mar 22",type:"TRAJ",t:"Retour montée ↑ souple",dur:45,km:6,dp:430,x:"Z2, sans forcer."},
+ {id:"s11a",w:11,d:"2026-09-22",day:"Mar 22",type:"TRAJ",t:"Retour montée ↑ souple",dur:45,km:4.5,dp:432,x:"Z2, sans forcer."},
  {id:"s11b",w:11,d:"2026-09-24",day:"Jeu 24",type:"EF",t:"Footing + relances",dur:45,km:8,dp:150,x:"35' Z2 puis 6 × 30\" de relances en légère côte. Garder l'étincelle sans creuser."},
  {id:"s11c",w:11,d:"2026-09-27",day:"Dim 27",type:"SL",t:"Trail plaisir",dur:90,km:11,dp:500,x:"1 h 30 max. Le dernier vrai contact avec les sentiers avant le grand jour."},
  {id:"s11r",w:11,d:"2026-09-23",day:"Mer 23",type:"RENFO",t:"Circuit renfo × 2 tours (dernier)",dur:15,km:0,dp:0,x:"Dernier de la préparation."},
