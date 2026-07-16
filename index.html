@@ -29,8 +29,9 @@ body{
   background:var(--night);
   color:var(--snow);
   font-family:'Archivo',system-ui,sans-serif;
-  font-size:15px;line-height:1.5;
+  font-size:16.5px;line-height:1.55;
   padding-bottom:70px;
+  -webkit-text-size-adjust:100%;
 }
 .wrap{max-width:680px;margin:0 auto;padding:0 14px}
 
@@ -58,7 +59,7 @@ h1 .thin{color:var(--mist);font-weight:400}
 /* ---------- hero ridge ---------- */
 #ridgeCard{padding:16px 0 4px}
 .sec-label{
-  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--mist);margin:0 0 8px;
 }
 #ridge{width:100%;height:auto;display:block;touch-action:manipulation}
@@ -71,9 +72,9 @@ h1 .thin{color:var(--mist);font-weight:400}
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0 6px}
 @media(min-width:520px){.stats{grid-template-columns:repeat(4,1fr)}}
 .stat{background:var(--pine);border:1px solid var(--edge);border-radius:12px;padding:12px 12px 10px}
-.stat .v{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;color:var(--snow)}
+.stat .v{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:var(--snow)}
 .stat .v em{font-style:normal;font-size:12px;color:var(--mist);font-weight:400}
-.stat .k{font-size:11px;color:var(--mist);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.stat .k{font-size:12px;color:var(--mist);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
 .stat.hl .v{color:var(--flag)}
 
 /* ---------- today ---------- */
@@ -83,8 +84,8 @@ h1 .thin{color:var(--mist);font-weight:400}
   border:1px solid var(--flag);border-radius:14px;padding:14px;
 }
 .today-card .when{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--flag);letter-spacing:.12em;text-transform:uppercase}
-.today-card h3{font-family:'Bricolage Grotesque',sans-serif;font-size:19px;margin:4px 0 2px}
-.today-card p{font-size:13px;color:var(--mist)}
+.today-card h3{font-family:'Bricolage Grotesque',sans-serif;font-size:21px;margin:5px 0 3px}
+.today-card p{font-size:14.5px;color:var(--mist);line-height:1.5}
 
 /* ---------- weeks ---------- */
 #weeks{margin-top:20px}
@@ -99,16 +100,16 @@ h1 .thin{color:var(--mist);font-weight:400}
 }
 .week.cur .wk-num{background:var(--flag)}
 .wk-title{flex:1;min-width:0}
-.wk-title b{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;display:block}
-.wk-title span{font-size:11.5px;color:var(--mist)}
-.wk-load{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--mist);text-align:right;flex-shrink:0}
+.wk-title b{font-family:'Bricolage Grotesque',sans-serif;font-size:16.5px;display:block}
+.wk-title span{font-size:13px;color:var(--mist)}
+.wk-load{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--mist);text-align:right;flex-shrink:0}
 .wk-load b{color:var(--snow);font-size:13px}
 .wk-prog{height:3px;background:var(--edge)}
 .wk-prog i{display:block;height:100%;background:var(--done);width:0;transition:width .3s}
 .wk-body{display:none;padding:4px 10px 12px}
 .week.open .wk-body{display:block}
 .wk-note{
-  font-size:12.5px;color:var(--mist);background:var(--night);border-radius:9px;
+  font-size:13.5px;color:var(--mist);background:var(--night);border-radius:9px;
   padding:9px 11px;margin:8px 4px 10px;border-left:3px solid var(--stone);
 }
 .wk-note.warn{border-left-color:var(--gold);color:#d8cfa8}
@@ -122,29 +123,30 @@ h1 .thin{color:var(--mist);font-weight:400}
 .sess.info{opacity:.62}
 .sess.checked .s-title{color:var(--done)}
 .chk{
-  width:24px;height:24px;border-radius:7px;border:2px solid var(--stone);flex-shrink:0;margin-top:2px;
+  width:30px;height:30px;border-radius:8px;border:2px solid var(--stone);flex-shrink:0;margin-top:2px;
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   font-size:15px;color:var(--night);transition:all .15s;background:transparent;
 }
 .sess.checked .chk{background:var(--done);border-color:var(--done)}
+.chk{font-size:18px}
 .sess.info .chk{visibility:hidden}
 .s-main{flex:1;min-width:0}
 .s-top{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
-.s-day{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mist);flex-shrink:0}
-.s-title{font-weight:600;font-size:14.5px}
+.s-day{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--mist);flex-shrink:0}
+.s-title{font-weight:600;font-size:16px}
 .badge{
-  font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.06em;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;
   padding:2px 6px;border-radius:5px;color:var(--night);flex-shrink:0;
 }
 .b-EF{background:var(--lichen)} .b-DP{background:var(--flag)} .b-TRAJ{background:var(--slate)}
 .b-SL{background:var(--gold)} .b-RENFO{background:#B9A7D9} .b-COURSE{background:var(--gold)}
 .b-GARDE{background:var(--stone);color:var(--snow)} .b-REPOS{background:var(--edge);color:var(--mist)}
 .b-FLEX{background:#D98FB6}
-.s-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mist);margin-top:1px}
-.s-desc{font-size:12.5px;color:var(--mist);margin-top:3px}
+.s-meta{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--mist);margin-top:2px}
+.s-desc{font-size:14px;color:var(--mist);margin-top:4px;line-height:1.5}
 .feel-chip{
-  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
-  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);
+  display:inline-flex;align-items:center;gap:4px;margin-top:8px;
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;padding:4px 9px;color:var(--gold);
   border:1px solid var(--edge);border-radius:6px;padding:2px 7px;cursor:pointer;
 }
 .feel-box{margin-top:8px;background:var(--night);border-radius:10px;padding:10px;display:none}
@@ -166,7 +168,7 @@ h1 .thin{color:var(--mist);font-weight:400}
 }
 .feel-box input[type=date]{color-scheme:dark}
 .btn{
-  border:none;border-radius:8px;padding:8px 14px;font-family:'Archivo',sans-serif;
+  border:none;border-radius:9px;padding:11px 16px;min-height:44px;font-family:'Archivo',sans-serif;
   font-weight:600;font-size:13px;cursor:pointer;
 }
 .btn.p{background:var(--flag);color:var(--night)}
@@ -231,8 +233,18 @@ h1 .thin{color:var(--mist);font-weight:400}
 .sess.postponed .s-title{text-decoration:line-through}
 .tag-report{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;background:var(--slate);color:var(--night);padding:2px 6px;border-radius:5px}
 .mini-actions{display:flex;gap:8px;margin-top:6px}
-.mini-actions button{background:none;border:1px solid var(--edge);color:var(--mist);border-radius:6px;font-size:11px;padding:3px 8px;cursor:pointer;font-family:'Archivo',sans-serif}
+.mini-actions button{background:none;border:1px solid var(--edge);color:var(--mist);border-radius:7px;font-size:12.5px;padding:7px 12px;cursor:pointer;font-family:'Archivo',sans-serif;min-height:38px}
 
+@media (max-width:600px){
+  .wrap{padding:0 12px}
+  .sess{padding:13px 4px}
+  .chk{width:32px;height:32px}
+  .wk-head{padding:15px 13px}
+  .feel-box input[type=range]{height:28px}
+  .stat{padding:13px 12px 11px}
+  .today-card{padding:16px}
+  h1{font-size:34px}
+}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -249,26 +261,28 @@ h1 .thin{color:var(--mist);font-weight:400}
   <div class="rubalise" aria-hidden="true"></div>
 </header>
 
-<section id="ridgeCard">
-  <div class="sec-label">La ligne de crête — 12 semaines, une par sommet</div>
-  <svg id="ridge" viewBox="0 0 720 190" role="img" aria-label="Profil de charge des 12 semaines"></svg>
-  <div class="ridge-legend">
-    <span><i class="dotk" style="background:var(--lichen)"></i>reprise / assimilation</span>
-    <span><i class="dotk" style="background:var(--flag)"></i>charge</span>
-    <span><i class="dotk" style="background:var(--gold)"></i>choc / pic</span>
-    <span><i class="dotk" style="background:var(--slate)"></i>affûtage</span>
-  </div>
-</section>
-
-<section class="stats" id="stats"></section>
+<section id="guard"></section>
 
 <section id="today"></section>
 
-<section id="guard"></section>
+<section id="weeks"></section>
+
+<section class="stats" id="stats"></section>
+
+<details class="foldable" id="ridgeFold">
+  <summary>La ligne de crête — 12 semaines en un coup d'œil</summary>
+  <div class="fold-body">
+    <svg id="ridge" viewBox="0 0 720 190" role="img" aria-label="Profil de charge des 12 semaines"></svg>
+    <div class="ridge-legend">
+      <span><i class="dotk" style="background:var(--lichen)"></i>reprise / assimilation</span>
+      <span><i class="dotk" style="background:var(--flag)"></i>charge</span>
+      <span><i class="dotk" style="background:var(--gold)"></i>choc / pic</span>
+      <span><i class="dotk" style="background:var(--slate)"></i>affûtage</span>
+    </div>
+  </div>
+</details>
 
 <section id="extras"></section>
-
-<section id="weeks"></section>
 
 <section id="chartCard">
   <div class="sec-label">Charge hebdo — prévu vs réalisé · RPE moyen (effort perçu)</div>
@@ -280,7 +294,7 @@ h1 .thin{color:var(--mist);font-weight:400}
   </div>
 </section>
 
-<details class="foldable" open>
+<details class="foldable" id="profilFold">
   <summary>Tes repères — lus sur ton Strava</summary>
   <div class="fold-body">
     <p>Séances calibrées sur <b>tes</b> données, pas sur des zones génériques. Corrige si ta montre affiche autre chose.</p>
